@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "984512474289",
+    "firebase_url": "https://garage-44cc0-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "garage-44cc0",
+    "storage_bucket": "garage-44cc0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984512474289:android:e796caa0bc7cc48fd78690",
+        "android_client_info": {
+          "package_name": "com.nyandry.garage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "984512474289-7k2cp3i3gfe8328ebgkq48b0dbqu04g2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhVA1Cn71dkMA8AGMSIdkc49JqAeXTiBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "984512474289-7k2cp3i3gfe8328ebgkq48b0dbqu04g2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
