@@ -75,8 +75,12 @@ async function initializePush() {
   } else {
     // --- LOGIQUE POUR LE WEB (TON CODE ACTUEL) ---
     try {
+      console.log("web mode");
+      
       const permission = await Notification.requestPermission();
       if (permission === 'granted') {
+        console.log("granted");
+        
         const currentToken = await getToken(messaging, { 
           vapidKey: 'BN7vt5bx8oorE3xnziC4SHqsqvkntWY5a9fW2Jl7oZpXjckg70QqsjjSpUdSB01_8XF9tFCt94tQt1cDRpCSTt8' 
         });
@@ -84,6 +88,8 @@ async function initializePush() {
                 if (currentToken) {
           await saveToken(currentToken); // <--- STOCKAGE PRÉFÉRENCES (WEB)
         }
+      } else {
+        console.log("not granted");
       }
     } catch (error) {
       console.error('Erreur Web Push:', error);
