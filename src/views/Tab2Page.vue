@@ -30,11 +30,8 @@ const sendToken = async () => {
   try {
     const res = await fetch(url);
     const data = await res.json();
-    console.log('Réponse serveur :', data);
-    alert('Token envoyé avec succès !');
   } catch (err) {
     console.error('Erreur lors de l’envoi du token :', err);
-    alert('Erreur lors de l’envoi du token.');
   }
 };
 
