@@ -1,0 +1,8 @@
+{
+  "name": "garage",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite",
+  "id": "bb262928"
+}
