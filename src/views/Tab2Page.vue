@@ -2,13 +2,12 @@
 import { onMounted, ref } from 'vue';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonButton, IonInput } from '@ionic/vue';
 import Header from '@/layout/Header.vue';
-import ExploreContainer from '@/components/ExploreContainer.vue';
 import { Preferences } from '@capacitor/preferences';
 
 const savedToken = ref<any>('');
 
 const loadToken = async () => {
-  const { value } = await Preferences.get({ key: 'fcm_token_debug' });
+  const { value } = await Preferences.get({ key: 'fcm_token' });
   savedToken.value = value;
 };
 
