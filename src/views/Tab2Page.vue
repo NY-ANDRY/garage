@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonButton } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonButton, IonInput } from '@ionic/vue';
 import Header from '@/layout/Header.vue';
 import ExploreContainer from '@/components/ExploreContainer.vue';
 import { Preferences } from '@capacitor/preferences';
@@ -56,6 +56,8 @@ const sendToken = async () => {
           <ion-button @click="sendToken">
             send
           </ion-button>
+
+          <ion-input :value="savedToken"></ion-input>
     </ion-content>
   </ion-page>
 </template>
