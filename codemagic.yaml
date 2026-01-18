@@ -3,7 +3,7 @@ workflows:
     name: Ionic Android APK
     max_build_duration: 60
     environment:
-      node: 18
+      node: 24
       java: 17
     scripts:
       - name: Install dependencies
