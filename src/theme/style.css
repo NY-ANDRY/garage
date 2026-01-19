@@ -25,11 +25,6 @@ ion-tab-bar {
   padding-bottom: var(--ion-safe-area-bottom);
 }
 
-ion-tab-bar {
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
-
 ion-ripple-effect {
   color: red !important;
 }
