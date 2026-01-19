@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  --font-figtree: "figtree", sans-serif;
+  --font-figtree-b: "figtree-b", sans-serif;
+  --font-figtree-m: "figtree-m", sans-serif;
+  --font-figtree-sb: "figtree-sb", sans-serif;
+  --font-figtree-ex: "figtree-ex", sans-serif;
+  --font-figtree-l: "figtree-l", sans-serif;
+}
+
+@font-face {
+  font-family: "figtree";
+  src: url("../assets/fonts/Figtree-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "figtree-b";
+  src: url("../assets/fonts/Figtree-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "figtree-m";
+  src: url("../assets/fonts/Figtree-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "figtree-sb";
+  src: url("../assets/fonts/Figtree-SemiBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "figtree-ex";
+  src: url("../assets/fonts/Figtree-Black.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "figtree-i";
+  src: url("../assets/fonts/Figtree-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}

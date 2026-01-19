@@ -1,0 +1,9 @@
+{
+  "hello": "Hello",
+  "login": {
+    "title": "Login"
+  },
+  "about": "about",
+  "second": "s",
+  "currency": "$"
+}

@@ -1,0 +1,29 @@
+<script setup lang="ts">
+import { IonPage, IonContent } from '@ionic/vue';
+import Header from '@/layout/Header.vue';
+import LoadingWrapper from '@/components/animations/LoadingWrapper.vue'; // ton wrapper
+import catAnimation from '../assets/animations/Running_Cat.json';
+import { ref } from 'vue';
+
+const loading = ref<boolean>(true);
+</script>
+
+<template>
+  <ion-page>
+    <Header title="Tabb 1"> </Header>
+    <ion-content :fullscreen="true">
+      <div class="default-screen">
+
+        <LoadingWrapper :loading="loading" :animationData="catAnimation" :width="400" :height="400">
+          
+          <div class="flex flex-col w-full min-h-full h-full items-center justify-center">
+            <h1 class="text-xl font-bold">Contenu chargé !</h1>
+            <p>La Lottie ne s’affiche plus car loading = false.</p>
+          </div>
+
+        </LoadingWrapper>
+
+      </div>
+    </ion-content>
+  </ion-page>
+</template>

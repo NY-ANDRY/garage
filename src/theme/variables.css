@@ -1,2 +1,17 @@
 /* For information on how to create your own theme, please refer to:
 http://ionicframework.com/docs/theming/ */
+
+:root {
+
+  --nav-svg-fill-active: #323232;
+  --nav-svg-fill-inactive: #ffffff;
+  --nav-svg-stroke-active: #323232;
+  --nav-svg-stroke-inactive: #ffffff;
+  --style-color-default: #242424;
+
+
+  --ion-safe-area-bottom: env(safe-area-inset-bottom);
+  --ion-default-font: 'figtree' !important;
+  --ion-text-color: var(--style-color-default);
+
+}

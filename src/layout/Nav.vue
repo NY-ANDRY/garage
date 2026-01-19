@@ -1,28 +1,45 @@
+<script setup lang="ts">
+import { IonTabBar, IonTabButton, IonTabs, IonPage, IonRouterOutlet } from '@ionic/vue';
+import HomeIcon from '@/components/icons/HomeIcon.vue';
+import WaitList from '@/components/icons/WaitListIcon.vue';
+import AddBtn from '@/components/icons/AddIcon.vue';
+import PayBtn from '@/components/icons/PayIcon.vue';
+import UserBtn from '@/components/icons/UserIcon.vue';
+
+</script>
+
 <template>
   <ion-page>
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="tab1" href="/tabs/tab1">
-          <ion-icon aria-hidden="true" :icon="triangle" />
-          <ion-label>Tab 1</ion-label>
-        </ion-tab-button>
 
-        <ion-tab-button tab="tab2" href="/tabs/tab2">
-          <ion-icon aria-hidden="true" :icon="ellipse" />
-          <ion-label>Tab 2</ion-label>
-        </ion-tab-button>
+        <div class="flex items-center justify-between w-full h-full">
 
-        <ion-tab-button tab="tab3" href="/tabs/tab3">
-          <ion-icon aria-hidden="true" :icon="square" />
-          <ion-label>Tab 3</ion-label>
-        </ion-tab-button>
+          <ion-tab-button tab="home" href="/tabs/home">
+            <HomeIcon />
+          </ion-tab-button>
+
+          <ion-tab-button tab="wait" href="/tabs/wait">
+            <WaitList />
+          </ion-tab-button>
+
+
+          <ion-tab-button tab="add" href="/tabs/add">
+            <AddBtn />
+          </ion-tab-button>
+
+          <ion-tab-button tab="pay" href="/tabs/pay">
+            <PayBtn />
+          </ion-tab-button>
+
+          <ion-tab-button tab="user" href="/tabs/user">
+            <UserBtn />
+          </ion-tab-button>
+
+        </div>
+
       </ion-tab-bar>
     </ion-tabs>
   </ion-page>
 </template>
-
-<script setup lang="ts">
-import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
-import { ellipse, square, triangle } from 'ionicons/icons';
-</script>

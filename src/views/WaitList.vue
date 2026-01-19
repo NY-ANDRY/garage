@@ -40,23 +40,19 @@ const sendToken = async () => {
   <ion-page>
     <Header title="Tabb 2"></Header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Tab </ion-title>
-        </ion-toolbar>
-      </ion-header>
+      <div class="default-screen">
+        <ion-item>
+          <p style="word-break: break-all; color: var(--ion-color-primary);">
+            {{ savedToken || 'Chargement ou aucun token...' }}
+          </p>
+        </ion-item>
 
-          <ion-item>
-            <p style="word-break: break-all; color: var(--ion-color-primary);">
-              {{ savedToken || 'Chargement ou aucun token...' }}
-            </p>
-          </ion-item>
+        <ion-button @click="sendToken">
+          send
+        </ion-button>
 
-          <ion-button @click="sendToken">
-            send
-          </ion-button>
-
-          <ion-input :value="savedToken"></ion-input>
+        <ion-input :value="savedToken"></ion-input>
+      </div>
     </ion-content>
   </ion-page>
 </template>

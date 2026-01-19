@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router';
 import { IonicVue } from '@ionic/vue';
 import { initializePush } from './config/messaging';
+import { i18n } from './locales/i18n';
 
 import '@ionic/vue/css/core.css';
 import '@ionic/vue/css/normalize.css';
@@ -17,10 +18,13 @@ import '@ionic/vue/css/display.css';
 import '@ionic/vue/css/palettes/dark.system.css';
 import './theme/tailwind.css';
 import './theme/variables.css';
+import './theme/style.css';
+import './theme/font.css';
 
 const app = createApp(App)
   .use(IonicVue)
-  .use(router);
+  .use(router)
+  .use(i18n);
 
 router.isReady().then(() => {
   app.mount('#app');

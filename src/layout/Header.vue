@@ -8,7 +8,9 @@ defineProps({
 <template>
   <ion-header>
     <ion-toolbar>
-      <ion-title>{{ title }}</ion-title>
+      <div class="flex h-full w-full px-2">
+        <ion-title>{{ title }}</ion-title>
+      </div>
     </ion-toolbar>
   </ion-header>
 </template>
