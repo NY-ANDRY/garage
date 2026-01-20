@@ -26,7 +26,6 @@ const { user } = useAuth();
             <WaitList />
           </ion-tab-button>
 
-
           <ion-tab-button tab="add" href="/tabs/add">
             <AddBtn />
           </ion-tab-button>

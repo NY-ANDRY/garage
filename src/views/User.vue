@@ -7,7 +7,7 @@ import { ref } from 'vue';
 
 import { useAuth } from '@/composables/useAuth';
 
-const { login, logout, loginWithPopup } = useAuth();
+const { login, logout } = useAuth();
 
 const loading = ref<boolean>(false);
 
@@ -30,10 +30,10 @@ const loading = ref<boolean>(false);
 
 
           <div class="flex flex-col gap-4">
+            <!-- <ion-button @click="login"> -->
+              <!-- login redirect -->
+            <!-- </ion-button> -->
             <ion-button @click="login">
-              login redirect
-            </ion-button>
-            <ion-button @click="loginWithPopup">
               login popup
             </ion-button>
             <ion-button @click="logout">
