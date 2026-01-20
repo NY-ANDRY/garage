@@ -2,14 +2,15 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import TabsPage from '../layout/Nav.vue'
 import TabsAuth from '../layout/NavAuth.vue'
-import Notification from '@/views/Notification.vue';
+import Notification from '@/views/notification/Notification.vue';
+import CarCreate from '@/views/car/CarCreate.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     redirect: '/tabs/home'
   },
-    {
+  {
     path: '/notifications',
     component: Notification
   },
@@ -23,23 +24,23 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'home',
-        component: () => import('@/views/Home.vue')
+        component: () => import('@/views/home/Home.vue')
       },
       {
-        path: 'wait',
-        component: () => import('@/views/WaitList.vue')
+        path: 'car',
+        component: () => import('@/views/car/Car.vue')
       },
       {
         path: 'add',
-        component: () => import('@/views/Add.vue')
+        component: () => import('@/views/add/Add.vue')
       },
       {
         path: 'pay',
-        component: () => import('@/views/Pay.vue')
+        component: () => import('@/views/pay/Pay.vue')
       },
       {
         path: 'user',
-        component: () => import('@/views/User.vue')
+        component: () => import('@/views/user/User.vue')
       }
     ]
   },

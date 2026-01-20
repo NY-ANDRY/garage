@@ -5,7 +5,7 @@ import Header from '@/layout/Header.vue';
 import { useFirestoreData } from '@/composables/userFirestoreData';
 import InterventionBox from "@/components/box/InterventionBox.vue";
 import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
-import catAnimation from '../assets/animations/Running_Cat.json';
+import catAnimation from '../../assets/animations/Running_Cat.json';
 import { motion } from 'motion-v';
 
 const { data, loading } = useFirestoreData("interventions");

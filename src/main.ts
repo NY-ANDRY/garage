@@ -4,6 +4,7 @@ import router from './router';
 import { IonicVue } from '@ionic/vue';
 import { initializePush } from './config/messaging';
 import { i18n } from './locales/i18n';
+import PrimeVue from 'primevue/config';
 
 import '@ionic/vue/css/core.css';
 import '@ionic/vue/css/normalize.css';
@@ -24,7 +25,8 @@ import './theme/font.css';
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
-  .use(i18n);
+  .use(i18n)
+  .use(PrimeVue);
 
 router.isReady().then(() => {
   app.mount('#app');

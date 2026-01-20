@@ -17,6 +17,16 @@ body {
   box-shadow: none !important;
 }
 
+/* .p-colorpicker-preview {
+  width: 20px !important;
+  height: 20px !important;
+} */
+.custom-modal .modal-wrapper {
+  border-top-left-radius: 24px;  /* ou rounded-t-3xl si tu veux utiliser Tailwind */
+  border-top-right-radius: 24px;
+  overflow: hidden; /* important pour que le contenu ne dépasse pas */
+}
+
 ion-toolbar {
   box-shadow: none !important;
 }

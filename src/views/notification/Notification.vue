@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonToolbar, } from '@ionic/vue';
 import { useFirestoreData } from '@/composables/userFirestoreData';
 import { motion } from 'motion-v';
-import catAnimation from '../assets/animations/Running_Cat.json';
+import catAnimation from '../../assets/animations/Running_Cat.json';
 import NotificationBox from '@/components/box/NotificationBox.vue';
 import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
 import { Notification } from '@/types/notification';
+import { Preferences } from '@capacitor/preferences';
 
 const { data, loading } = useFirestoreData<Notification>("notifications");
 
@@ -22,6 +24,33 @@ const motionFade = {
   transition: { duration: 0.2 }
 };
 
+const savedToken = ref<any>('');
+
+const loadToken = async () => {
+  const { value } = await Preferences.get({ key: 'fcm_token' });
+  savedToken.value = value;
+};
+
+onMounted(() => {
+  loadToken();
+});
+
+const sendToken = async () => {
+  if (!savedToken.value) {
+    console.warn('Pas de token à envoyer.');
+    return;
+  }
+
+  const encodedToken = encodeURIComponent(savedToken.value);
+  const url = `https://garage-api-eta.vercel.app/send?token=${encodedToken}`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+  } catch (err) {
+    console.error('Erreur lors de l’envoi du token :', err);
+  }
+};
 </script>
 
 <template>
@@ -44,6 +73,20 @@ const motionFade = {
           </motion.div>
 
         </LoadingWrapper>
+
+        <div class="flex flex-col">
+          <ion-item>
+            <p style="word-break: break-all; color: var(--ion-color-primary);">
+              {{ savedToken || 'Chargement ou aucun token...' }}
+            </p>
+          </ion-item>
+
+          <ion-button @click="sendToken">
+            send
+          </ion-button>
+
+          <ion-input :value="savedToken"></ion-input>
+        </div>
 
       </div>
 
