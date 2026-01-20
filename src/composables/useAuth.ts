@@ -24,7 +24,7 @@ const AuthSymbol = Symbol("Auth");
 const MOBILE_SCHEME = "nyandrygarage";
 const MOBILE_REDIRECT_URI = `${MOBILE_SCHEME}://auth`;
 const google_WEB_CLIENT_ID = "984512474289-7k2cp3i3gfe8328ebgkq48b0dbqu04g2.apps.googleusercontent.com";
-
+// 984512474289-8ldg0g8dtcn7m0fjjjpd71fb4p9p2kan.apps.googleusercontent.com
 export function provideAuth(): AuthState {
   const user = ref<User | null>(null);
 
