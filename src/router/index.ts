@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import TabsPage from '../layout/Nav.vue'
+import TabsAuth from '../layout/NavAuth.vue'
 import Notification from '@/views/Notification.vue';
 
 const routes: Array<RouteRecordRaw> = [
@@ -39,6 +40,24 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'user',
         component: () => import('@/views/User.vue')
+      }
+    ]
+  },
+  {
+    path: '/auth/',
+    component: TabsAuth,
+    children: [
+      {
+        path: '',
+        redirect: '/auth/login'
+      },
+      {
+        path: 'login',
+        component: () => import('@/views/auth/Login.vue')
+      },
+      {
+        path: 'signin',
+        component: () => import('@/views/auth/SignIn.vue')
       }
     ]
   }

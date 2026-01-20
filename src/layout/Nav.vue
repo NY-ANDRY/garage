@@ -4,8 +4,10 @@ import HomeIcon from '@/components/icons/HomeIcon.vue';
 import WaitList from '@/components/icons/WaitListIcon.vue';
 import AddBtn from '@/components/icons/AddIcon.vue';
 import PayBtn from '@/components/icons/PayIcon.vue';
-import UserBtn from '@/components/icons/UserIcon.vue';
+import CurUserIcon from '@/components/icons/CurUserIcon.vue';
+import { useAuth } from '@/composables/useAuth';
 
+const { user } = useAuth();
 </script>
 
 <template>
@@ -34,7 +36,7 @@ import UserBtn from '@/components/icons/UserIcon.vue';
           </ion-tab-button>
 
           <ion-tab-button tab="user" href="/tabs/user">
-            <UserBtn />
+            <CurUserIcon />
           </ion-tab-button>
 
         </div>

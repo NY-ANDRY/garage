@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonButton, IonInput } from '@ionic/vue';
+import { IonPage, IonContent, IonItem, IonButton, IonInput } from '@ionic/vue';
 import Header from '@/layout/Header.vue';
 import { Preferences } from '@capacitor/preferences';
 

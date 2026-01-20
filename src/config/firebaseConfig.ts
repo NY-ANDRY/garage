@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase } from "firebase/database";
 import { getFirestore } from "firebase/firestore";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signOut, signInWithPopup, signInWithRedirect, getRedirectResult } from "firebase/auth";
 import { getMessaging } from "firebase/messaging";
 
 const firebaseConfig = {
@@ -20,12 +20,13 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const realtimeDb = getDatabase(app);
 const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
 const firestore = getFirestore(app);
 const messaging = getMessaging(app);
 
-export { app, realtimeDb, firestore, analytics, 
-  auth, provider, 
-  signInWithPopup, signOut,
+export {
+  app, realtimeDb, firestore, analytics,
+  auth, googleProvider, getRedirectResult,
+  signInWithRedirect, signInWithPopup, signOut,
   messaging
- };
+};
