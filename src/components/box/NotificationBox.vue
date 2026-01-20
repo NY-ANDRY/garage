@@ -8,7 +8,6 @@ import { Timestamp } from "firebase/firestore";
 
 const props = defineProps<{ item: Notification }>();
 
-
 const { mutate, loading, error } = useFirestoreMutation("notifications");
 
 const selected = ref<boolean>(false);
