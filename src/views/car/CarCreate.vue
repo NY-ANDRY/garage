@@ -62,7 +62,7 @@ const handleSubmit = async () => {
   </div>
 
   <!-- Modal -->
-  <ion-modal :is-open="open" initial-breakpoint="0.98" :breakpoints="[0, 0.7, 0.98]" @didDismiss="closeModal"
+  <ion-modal :is-open="open" initial-breakpoint="0.98" :breakpoints="[0, 0.98, 0.98]" @didDismiss="closeModal"
     class="custom-modal">
     <ion-content class="p-0 overflow-hidden">
       <div class="bg-white rounded-t-3xl p-6 space-y-4">
