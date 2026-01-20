@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { IonPage, IonContent } from '@ionic/vue';
 import Header from '@/layout/Header.vue';
-import LoadingWrapper from '@/components/animations/LoadingWrapper.vue'; // ton wrapper
-import catAnimation from '../assets/animations/Running_Cat.json';
+import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
+import catAnimation from '../assets/animations/Car.json';
 import { ref } from 'vue';
 
 const loading = ref<boolean>(true);

@@ -1,11 +1,16 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import TabsPage from '../layout/Nav.vue'
+import Notification from '@/views/Notification.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     redirect: '/tabs/home'
+  },
+    {
+    path: '/notifications',
+    component: Notification
   },
   {
     path: '/tabs/',

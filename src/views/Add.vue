@@ -3,11 +3,8 @@ import { ref } from 'vue';
 import { IonPage, IonContent } from '@ionic/vue';
 import Header from '@/layout/Header.vue';
 import { useFirestoreData } from '@/composables/userFirestoreData';
-import { AnimatePresence } from 'motion-v';
-import ph from "../assets/svg/ph-1.svg";
 import InterventionBox from "@/components/box/InterventionBox.vue";
-
-import { Vue3Lottie } from 'vue3-lottie';
+import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
 import catAnimation from '../assets/animations/Running_Cat.json';
 import { motion } from 'motion-v';
 
@@ -40,23 +37,18 @@ const motionFade = {
   <ion-page>
     <Header title="Tabb 3"> </Header>
     <ion-content :fullscreen="true">
-        <div class="default-screen flex flex-col gap-2">
+      <div class="default-screen flex flex-col gap-2">
 
-        <AnimatePresence mode="wait">
+        <LoadingWrapper :loading="loading" :animationData="catAnimation" :width="400" :height="400">
 
-          <motion.div v-if="loading" key="loading" v-bind="motionFade"
-            class="flex w-full h-full items-center justify-center">
-            <Vue3Lottie :animationData="catAnimation" :height="400" :width="400" />
-          </motion.div>
-
-          <motion.div v-else key="data" v-bind="motionFade" class="grid grid-cols-2 gap-3">
+          <motion.div key="data" v-bind="motionFade" class="grid grid-cols-1 gap-3">
             <InterventionBox v-for="item in data" :key="item.id" :item="item" :isSelected="isSelected(item.id)"
-              :placeholder="ph" @toggle="toggleSelect" />
+              @toggle="toggleSelect" />
           </motion.div>
 
-        </AnimatePresence>
+        </LoadingWrapper>
 
-        </div>
+      </div>
     </ion-content>
   </ion-page>
 </template>

@@ -8,10 +8,11 @@ http://ionicframework.com/docs/theming/ */
   --nav-svg-stroke-active: #323232;
   --nav-svg-stroke-inactive: #ffffff;
   --style-color-default: #242424;
+  --style-color-title: #262626;
 
 
   --ion-safe-area-bottom: env(safe-area-inset-bottom);
-  --ion-default-font: 'figtree' !important;
+  --ion-default-font: 'inter' !important;
   --ion-text-color: var(--style-color-default);
-
+  --ripple-color: transparent;
 }

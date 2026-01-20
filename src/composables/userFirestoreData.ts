@@ -1,16 +1,17 @@
-import { ref as vueRef, onMounted, onUnmounted, watch } from "vue";
-import { collection, onSnapshot } from "firebase/firestore";
+import { ref as vueRef, onMounted, onUnmounted, watch, Ref } from "vue";
+import { collection, onSnapshot, Unsubscribe, DocumentData } from "firebase/firestore";
 import { firestore } from "../config/firebaseConfig";
 
-export function useFirestoreData(collectionName: string) {
-  const data = vueRef<any[]>([]);
-  const loading = vueRef(true); // ← nouvelle variable
-  let unsubscribe: (() => void) | null = null;
+export function useFirestoreData<T extends DocumentData>(collectionName: string) {
+  const data: Ref<(T & { id: string })[]> = vueRef([]);
+  const loading = vueRef<boolean>(true);
 
-  const subscribe = (name: string) => {
+  let unsubscribe: Unsubscribe | null = null;
+
+  const subscribe = (name: string): void => {
     if (!name) return;
 
-    loading.value = true; // on commence le chargement
+    loading.value = true;
     const colRef = collection(firestore, name);
 
     unsubscribe = onSnapshot(
@@ -18,13 +19,13 @@ export function useFirestoreData(collectionName: string) {
       (snapshot) => {
         data.value = snapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data(),
+          ...(doc.data() as T),
         }));
-        loading.value = false; // données chargées
+        loading.value = false;
       },
       (error) => {
         console.error("Firestore error:", error);
-        loading.value = false; // arrêt du loading en cas d'erreur
+        loading.value = false;
       }
     );
   };
@@ -45,5 +46,5 @@ export function useFirestoreData(collectionName: string) {
     }
   );
 
-  return { data, loading }; // ← renvoie maintenant loading
+  return { data, loading };
 }

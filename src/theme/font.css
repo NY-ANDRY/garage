@@ -1,52 +1,108 @@
 @import "tailwindcss";
 
-@theme {
-  --font-figtree: "figtree", sans-serif;
+/* @theme {
+  --font-figtree: "inter", sans-serif;
   --font-figtree-b: "figtree-b", sans-serif;
   --font-figtree-m: "figtree-m", sans-serif;
   --font-figtree-sb: "figtree-sb", sans-serif;
   --font-figtree-ex: "figtree-ex", sans-serif;
   --font-figtree-l: "figtree-l", sans-serif;
-}
+} */
 
 @font-face {
-  font-family: "figtree";
-  src: url("../assets/fonts/Figtree-Regular.ttf") format("truetype");
+  font-family: "inter";
+  src: url("../assets/fonts/Inter_18pt-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "figtree-b";
-  src: url("../assets/fonts/Figtree-Bold.ttf") format("truetype");
+  font-family: "inter-b";
+  src: url("../assets/fonts/Inter_18pt-Bold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "figtree-m";
-  src: url("../assets/fonts/Figtree-Medium.ttf") format("truetype");
+  font-family: "inter-m";
+  src: url("../assets/fonts/Inter_18pt-Medium.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "figtree-sb";
-  src: url("../assets/fonts/Figtree-SemiBold.ttf") format("truetype");
+  font-family: "inter-sb";
+  src: url("../assets/fonts/Inter_18pt-SemiBold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "figtree-ex";
-  src: url("../assets/fonts/Figtree-Black.ttf") format("truetype");
+  font-family: "inter-ex";
+  src: url("../assets/fonts/Inter_18pt-Black.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "figtree-i";
-  src: url("../assets/fonts/Figtree-Italic.ttf") format("truetype");
+  font-family: "inter-i";
+  src: url("../assets/fonts/Inter_18pt-Italic.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: "inter-t";
+  src: url("../assets/fonts/Inter_18pt-Thin.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: "interT";
+  src: url("../assets/fonts/Inter_18pt-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "interT-b";
+  src: url("../assets/fonts/InterTight-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "interT-m";
+  src: url("../assets/fonts/InterTight-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "interT-sb";
+  src: url("../assets/fonts/InterTight-SemiBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "interT-ex";
+  src: url("../assets/fonts/InterTight-Black.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "interT-i";
+  src: url("../assets/fonts/InterTight-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "interT-t";
+  src: url("../assets/fonts/InterTight-Thin.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
