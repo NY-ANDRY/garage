@@ -18,7 +18,7 @@ const color = ref("000000");
 
 <template>
   <motion.div @click="handleRead" :while-press="pressEffect" layout class="box relative flex flex-col h-full justify-between p-3 rounded-xl gap-3
-           transition-all overflow-hidden bg-neutral-50">
+           transition-all overflow-hidden bg-neutral-100">
 
       <img v-if="item.url_img || item.url_img !== ''" :src="ph" class="w-full max-w-full max-h-36 rounded-sm" />
       <!-- <img v-else :src="ph" class="w-full max-w-full max-h-36 rounded-sm" /> -->
