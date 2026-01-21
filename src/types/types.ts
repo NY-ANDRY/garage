@@ -2,10 +2,10 @@ import { Timestamp } from "firebase/firestore";
 
 export type User = {
     uid?: string;
-    email?: string;
+    email?: string | undefined | null;
     displayName?: string | undefined | null;
     photoURL?: string | undefined | null;
-    fcmToken?: string;
+    fcmToken?: string | undefined | null;
 };
 
 export type Notification = {

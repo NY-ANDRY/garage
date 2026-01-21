@@ -32,14 +32,18 @@ export function useFirestoreMutation<T extends DocumentData>(
     try {
       const type = options?.type ?? "update";
 
-      // 🔹 SET (sans id)
       if (type === "set" && payload) {
-        const colRef = collection(firestore, collectionName);
-        await addDoc(colRef, payload);
+        if (options?.id) {
+          const docRef = doc(firestore, collectionName, options.id);
+          await setDoc(docRef, payload);
+        } 
+        else {
+          const colRef = collection(firestore, collectionName);
+          await addDoc(colRef, payload);
+        }
         return;
       }
 
-      // 🔹 UPDATE / DELETE (id obligatoire)
       if (!options?.id) {
         throw new Error("ID requis pour update ou delete");
       }

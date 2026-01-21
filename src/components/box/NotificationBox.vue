@@ -16,7 +16,7 @@ const pressEffect = { scale: 0.97 };
 
 const handleRead = () => {
   if (!props.item.read) {
-    mutate(props.item.id, { read: Timestamp.now() });
+    mutate({ read: Timestamp.now() }, { type: 'update', id: props.item.id });
   }
   selected.value = !selected.value;
 
