@@ -11,9 +11,6 @@ body {
   padding-right: 16px;
   display: flex;
   flex-direction: column;
-
-  overflow: hidden;
-  overflow-y: auto;
 }
 
 .header-md {

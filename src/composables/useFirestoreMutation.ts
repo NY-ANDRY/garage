@@ -1,54 +1,70 @@
-import { ref } from "vue";
 import {
-    doc,
-    updateDoc,
-    setDoc,
-    deleteDoc,
-    DocumentData
+  doc,
+  updateDoc,
+  setDoc,
+  deleteDoc,
+  addDoc,
+  collection,
+  DocumentData
 } from "firebase/firestore";
+
+import { ref } from "vue";
 import { firestore } from "@/config/firebaseConfig";
 
 type MutationType = "update" | "set" | "delete";
 
 export function useFirestoreMutation<T extends DocumentData>(
-    collectionName: string
+  collectionName: string
 ) {
-    const loading = ref(false);
-    const error = ref<Error | null>(null);
+  const loading = ref(false);
+  const error = ref<Error | null>(null);
 
-    const mutate = async (
-        id: string,
-        payload?: any,
-        type: MutationType = "update"
-    ): Promise<void> => {
-        loading.value = true;
-        error.value = null;
+  const mutate = async (
+    payload?: T,
+    options?: {
+      type?: MutationType;
+      id?: string;
+    }
+  ): Promise<void> => {
+    loading.value = true;
+    error.value = null;
 
-        try {
-            const docRef: any = doc(firestore, collectionName, id);
+    try {
+      const type = options?.type ?? "update";
 
-            if (type === "update" && payload) {
-                await updateDoc(docRef, payload);
-            }
+      // 🔹 SET (sans id)
+      if (type === "set" && payload) {
+        const colRef = collection(firestore, collectionName);
+        await addDoc(colRef, payload);
+        return;
+      }
 
-            if (type === "set" && payload) {
-                await setDoc(docRef, payload, { merge: true });
-            }
+      // 🔹 UPDATE / DELETE (id obligatoire)
+      if (!options?.id) {
+        throw new Error("ID requis pour update ou delete");
+      }
 
-            if (type === "delete") {
-                await deleteDoc(docRef);
-            }
-        } catch (e) {
-            error.value = e as Error;
-            throw e;
-        } finally {
-            loading.value = false;
-        }
-    };
+      const docRef = doc(firestore, collectionName, options.id);
 
-    return {
-        mutate,
-        loading,
-        error
-    };
+      if (type === "update" && payload) {
+        await updateDoc(docRef, payload);
+      }
+
+      if (type === "delete") {
+        await deleteDoc(docRef);
+      }
+
+    } catch (e) {
+      error.value = e as Error;
+      throw e;
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  return {
+    mutate,
+    loading,
+    error
+  };
 }

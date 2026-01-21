@@ -1,24 +1,20 @@
 <script setup lang="ts">
 import { motion } from "motion-v";
 import ph from "../../assets/svg/ph-2.svg";
-import { Voiture } from "@/types/voitures";
-import ColorPicker from 'primevue/colorpicker';
-import { ref } from "vue";
+import { Voiture } from "@/types/types";
 
 const props = defineProps<{ item: Voiture }>();
 
-
-const pressEffect = { scale: 1 };
+const pressEffect = { scale: 0.97 };
 
 const handleRead = () => {
 }
 
-const color = ref("000000");
 </script>
 
 <template>
   <motion.div @click="handleRead" :while-press="pressEffect" layout class="box relative flex flex-col h-full justify-between p-3 rounded-xl gap-3
-           transition-all overflow-hidden bg-neutral-100">
+           transition-all overflow-hidden bg-neutral-100 border-r-10 w-full" :style="{ borderColor: `#${item.couleurHex}` }">
 
       <img v-if="item.url_img || item.url_img !== ''" :src="ph" class="w-full max-w-full max-h-36 rounded-sm" />
       <!-- <img v-else :src="ph" class="w-full max-w-full max-h-36 rounded-sm" /> -->
@@ -35,7 +31,7 @@ const color = ref("000000");
           {{ item.description }}
         </div>
         <div class="flex rounded-sm overflow-hidden">
-          <ColorPicker disabled v-model="color" />
+          <!-- <ColorPicker disabled v-model="color" /> -->
         </div>
       </div>
 

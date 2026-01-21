@@ -8,7 +8,7 @@ const props = defineProps<{
 
 <template>
     <button v-bind="$attrs" class="w-full h-full bg- bg-neutral-900 text-neutral-200 active:bg-neutral-700 transition-all font-[interT] rounded-2xl">
-        {{ props.label || "Bouton" }}
+        <slot></slot>
     </button>
 </template>
 

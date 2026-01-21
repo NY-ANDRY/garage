@@ -6,7 +6,7 @@ import { motion } from 'motion-v';
 import catAnimation from '../../assets/animations/Running_Cat.json';
 import NotificationBox from '@/components/box/NotificationBox.vue';
 import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
-import { Notification } from '@/types/notification';
+import { Notification } from '@/types/types';
 import { Preferences } from '@capacitor/preferences';
 
 const { data, loading } = useFirestoreData<Notification>("notifications");

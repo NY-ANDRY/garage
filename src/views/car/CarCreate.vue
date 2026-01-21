@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { IonModal, IonContent, IonButton } from '@ionic/vue';
-import { User } from "firebase/auth";
-import { Voiture } from "@/types/voitures";
+import { IonModal, IonContent } from '@ionic/vue';
+import { Voiture } from "@/types/types";
 import TextInput from "@/components/input/TextInput.vue";
 import { DatePicker } from "primevue";
 import ColorPicker from 'primevue/colorpicker';
 import Button from "@/components/buttons/Button.vue";
 import { useFirestoreMutation } from "@/composables/useFirestoreMutation";
-
 import { useAuth } from '@/composables/useAuth';
+
 const { user } = useAuth();
 
 const open = ref(false);
@@ -23,8 +22,11 @@ const couleurHex = ref('');
 const marque = ref('');
 const annee = ref('');
 const date = ref();
+
 const closeModal = () => {
   open.value = false;
+  console.log("dismisssss");
+
 };
 
 const handleSubmit = async () => {
@@ -37,15 +39,14 @@ const handleSubmit = async () => {
     marque: marque.value,
     annee: annee.value,
     user: {
-      id: user.value?.uid,
+      uid: user.value?.uid,
       displayName: user.value?.displayName,
-      photoUrl: user.value?.photoURL
+      photoURL: user.value?.photoURL
     }
   };
   try {
-    // Ici on crée un nouvel ID automatiquement avec setDoc
-    const docId = `${Date.now()}`; // simple ID basé sur timestamp, tu peux utiliser nanoid ou autre
-    await mutate(docId, newCar, "set");
+    const docId = `${Date.now()}`;
+    await mutate(newCar, { type: "set" });
     console.log("Voiture ajoutée avec succès :", newCar);
     closeModal();
   } catch (err) {
@@ -55,15 +56,13 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <!-- Bouton pour ouvrir le modal -->
   <div @click="open = true"
-    class="flex items-center justify-center w-full h-20 border-dashed rounded-xl border-2 border-neutral-100 text-neutral-400 mb-4">
+    class="flex items-center justify-center w-full h-20 min-h-20 border-dashed rounded-xl border-2 border-neutral-100 text-neutral-400 mb-4">
     Créer une nouvelle voiture
   </div>
 
-  <!-- Modal -->
   <ion-modal :is-open="open" initial-breakpoint="0.98" :breakpoints="[0, 0.98, 0.98]" @didDismiss="closeModal"
-    class="custom-modal">
+    class="custom-modalll">
     <ion-content class="p-0 overflow-hidden">
       <div class="bg-white rounded-t-3xl p-6 space-y-4">
         <h2 class="text-xl font-semibold mb-4">Créer une voiture</h2>
