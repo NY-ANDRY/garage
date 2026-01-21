@@ -5,6 +5,7 @@ import { IonicVue } from '@ionic/vue';
 import { initializePush } from './config/messaging';
 import { i18n } from './locales/i18n';
 import PrimeVue from 'primevue/config';
+import { createPinia } from 'pinia'
 
 import '@ionic/vue/css/core.css';
 import '@ionic/vue/css/normalize.css';
@@ -22,11 +23,13 @@ import './theme/variables.css';
 import './theme/style.css';
 import './theme/font.css';
 
+const pinia = createPinia()
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
   .use(i18n)
-  .use(PrimeVue);
+  .use(PrimeVue)
+  .use(pinia);
 
 router.isReady().then(() => {
   app.mount('#app');

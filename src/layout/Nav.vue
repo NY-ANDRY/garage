@@ -5,9 +5,9 @@ import AddBtn from '@/components/icons/AddIcon.vue';
 import PayBtn from '@/components/icons/PayIcon.vue';
 import CurUserIcon from '@/components/icons/CurUserIcon.vue';
 import CarIcon from '@/components/icons/CarIcon.vue';
-import { useAuth } from '@/composables/useAuth';
+import { useAuthStore } from '@/stores/auth';
 
-const { user } = useAuth();
+const { user } = useAuthStore();
 </script>
 
 <template>

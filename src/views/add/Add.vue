@@ -12,9 +12,10 @@ import CarSelect from '../car/CarSelect.vue';
 import Button from '@/components/buttons/Button.vue';
 import { useFirestoreMutation } from '@/composables/useFirestoreMutation';
 import { Timestamp } from 'firebase/firestore';
-import { useAuth } from '@/composables/useAuth';
+import { useAuthStore} from '@/stores/auth';
+import { motionFade } from '@/components/animations/motionBind';
 
-const { user } = useAuth();
+const { user } = useAuthStore();
 
 const { mutate, loading: loadingCreate, error: errorCreate } = useFirestoreMutation("reparations");
 
@@ -41,27 +42,21 @@ const toggleIntervention = (item: any) => {
 const isSelected = (id: any) => {
   return selectedIntervention.value.some(i => i.id === id)
 }
-const motionFade = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-  transition: { duration: 0.2 }
-};
 
 const handleSubmit = async () => {
   if (car.value == null) {
     return;
   }
-  if (user.value == null) {
+  if (user == null) {
     return;
   }
-  
+
   const newReparation: Reparation = {
     voiture: car.value,
     user: {
-      uid: user.value.uid,
-      displayName: user.value.displayName,
-      photoURL: user.value.photoURL
+      uid: user.uid,
+      displayName: user.displayName,
+      photoURL: user.photoURL
     },
     interventions: selectedIntervention.value,
     statut: 0,
@@ -83,28 +78,26 @@ const handleSubmit = async () => {
   <ion-page>
     <Header title="Tabb 3"> </Header>
     <ion-content :fullscreen="true">
-      <div class="default-screen flex flex-col gap-2">
 
-        <LoadingWrapper :loading="loading" :animationData="catAnimation" :width="400" :height="400">
+      <LoadingWrapper :loading="loading" :animationData="catAnimation" :width="400" :height="400">
 
-          <div class="flex py-2">
-            <CarSelect @select="setCar" />
-          </div>
+        <div class="flex py-2">
+          <CarSelect @select="setCar" />
+        </div>
 
-          <motion.div key="data" v-bind="motionFade" class="grid grid-cols-1 gap-3">
-            <InterventionBox v-for="item in data" :key="item.id" :item="item" :isSelected="isSelected(item.id)"
-              @toggle="toggleIntervention" />
-          </motion.div>
+        <motion.div key="data" v-bind="motionFade" class="grid grid-cols-1 gap-3">
+          <InterventionBox v-for="item in data" :key="item.id" :item="item" :isSelected="isSelected(item.id)"
+            @toggle="toggleIntervention" />
+        </motion.div>
 
-          <div class="flex gap-2 mt-4">
-            <Button @click="handleSubmit">
-              Créer
-            </Button>
-          </div>
+        <div class="flex gap-2 mt-4">
+          <Button @click="handleSubmit">
+            Créer
+          </Button>
+        </div>
 
-        </LoadingWrapper>
+      </LoadingWrapper>
 
-      </div>
     </ion-content>
   </ion-page>
 </template>

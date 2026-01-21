@@ -6,7 +6,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <button v-bind="$attrs" class="w-full h-full bg-neutral-900 text-neutral-200 active:bg-neutral-700 transition-all font-[interT] rounded-2xl">
+    <button v-bind="$attrs" class="w-full h-full bg-neutral-50 text-neutral-800 active:bg-neutral-200 transition-all font-[interT] rounded-2xl">
         <slot></slot>
     </button>
 </template>

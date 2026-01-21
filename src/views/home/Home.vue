@@ -12,18 +12,16 @@ const loading = ref<boolean>(true);
   <ion-page>
     <Header title="Tabb 1"> </Header>
     <ion-content :fullscreen="true">
-      <div class="default-screen">
 
-        <LoadingWrapper :loading="loading" :animationData="catAnimation" :width="400" :height="400">
-          
-          <div class="flex flex-col w-full min-h-full h-full items-center justify-center">
-            <h1 class="text-xl font-bold">Contenu chargé !</h1>
-            <p>La Lottie ne s’affiche plus car loading = false.</p>
-          </div>
+      <LoadingWrapper :loading="loading" :animationData="catAnimation" :width="400" :height="400">
 
-        </LoadingWrapper>
+        <div class="flex flex-col w-full min-h-full h-full items-center justify-center">
+          <h1 class="text-xl font-bold">Contenu chargé !</h1>
+          <p>La Lottie ne s’affiche plus car loading = false.</p>
+        </div>
 
-      </div>
+      </LoadingWrapper>
+
     </ion-content>
   </ion-page>
 </template>

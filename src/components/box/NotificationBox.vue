@@ -5,6 +5,7 @@ import { ref } from "vue";
 import { Notification } from "@/types/types";
 import { useFirestoreMutation } from "@/composables/useFirestoreMutation";
 import { Timestamp } from "firebase/firestore";
+import { motionFade } from '@/components/animations/motionBind';
 
 const props = defineProps<{ item: Notification }>();
 
@@ -21,13 +22,6 @@ const handleRead = () => {
   selected.value = !selected.value;
 
 }
-
-const motionFade = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-  transition: { duration: 0.2 }
-};
 
 </script>
 

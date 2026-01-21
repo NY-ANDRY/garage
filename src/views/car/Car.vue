@@ -8,34 +8,38 @@ import { Voiture } from '@/types/types';
 import { motion } from 'motion-v';
 import CarBox from '@/components/box/CarBox.vue';
 import Create from './CarCreate.vue';
+import { motionFade } from '@/components/animations/motionBind';
 
 const { data, loading } = useFirestoreData<Voiture>("voitures");
 
-const motionFade = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-  transition: { duration: 0.2 }
-};
 </script>
 
 <template>
   <ion-page>
-    <Header title="Tab Car"></Header>
-    <ion-content :fullscreen="true">
-      <div class="default-screen mb-48">
+    <Header title="Tab Car"> </Header>
 
-        <LoadingWrapper :loading="loading" :animationData="catAnimation" :width="400" :height="400">
+    <ion-content fullscreen>
+      <LoadingWrapper
+        :loading="loading"
+        :animationData="catAnimation"
+        :width="400"
+        :height="400"
+      >
+        <Create />
 
-          <Create />
-
-          <motion.div key="data" v-bind="motionFade" class="grid grid-cols-1 gap-4">
-            <CarBox v-for="item in data" :key="item.id" :item="item" />
-          </motion.div>
-
-        </LoadingWrapper>
-
-      </div>
+        <motion.div
+          key="data"
+          v-bind="motionFade"
+          class="grid grid-cols-1 gap-4"
+        >
+          <CarBox
+            v-for="item in data"
+            :key="item.id"
+            :item="item"
+          />
+        </motion.div>
+      </LoadingWrapper>
     </ion-content>
   </ion-page>
 </template>
+

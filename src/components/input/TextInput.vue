@@ -16,7 +16,7 @@ const updateValue = (event: Event) => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-1">
+  <div class="flex flex-col gap-1 w-full">
     <label v-if="label" class="text-sm text-neutral-500 font-[inter-t]">{{ label }}</label>
     <input
       :value="props.modelValue"

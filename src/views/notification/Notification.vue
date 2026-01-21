@@ -8,6 +8,7 @@ import NotificationBox from '@/components/box/NotificationBox.vue';
 import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
 import { Notification } from '@/types/types';
 import { Preferences } from '@capacitor/preferences';
+import { motionFade } from '@/components/animations/motionBind';
 
 const { data, loading } = useFirestoreData<Notification>("notifications");
 
@@ -15,13 +16,6 @@ const getBackButtonText = () => {
   const win = window as any;
   const mode = win && win.Ionic && win.Ionic.mode;
   return mode === 'ios' ? 'Inbox' : '';
-};
-
-const motionFade = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-  transition: { duration: 0.2 }
 };
 
 const savedToken = ref<any>('');
@@ -64,15 +58,12 @@ const sendToken = async () => {
     </ion-header>
 
     <ion-content :fullscreen="true">
-      <div class="default-screen flex flex-col gap-2">
 
-        <LoadingWrapper :loading="loading" :animationData="catAnimation" :width="400" :height="400">
+      <LoadingWrapper :loading="loading" :animationData="catAnimation" :width="400" :height="400">
 
-          <motion.div key="data" v-bind="motionFade" class="grid grid-cols-1 gap-3">
-            <NotificationBox v-for="item in data" :key="item.id" :item="item" />
-          </motion.div>
-
-        </LoadingWrapper>
+        <motion.div key="data" v-bind="motionFade" class="grid grid-cols-1 gap-3">
+          <NotificationBox v-for="item in data" :key="item.id" :item="item" />
+        </motion.div>
 
         <div class="flex flex-col">
           <ion-item>
@@ -88,7 +79,7 @@ const sendToken = async () => {
           <ion-input :value="savedToken"></ion-input>
         </div>
 
-      </div>
+      </LoadingWrapper>
 
     </ion-content>
   </ion-page>

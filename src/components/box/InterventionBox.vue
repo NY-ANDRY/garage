@@ -1,22 +1,19 @@
 <script setup lang="ts">
 import { motion, AnimatePresence } from "motion-v";
 import ph from "../../assets/svg/ph-1.svg";
+import { Intervention } from "@/types/types";
+import { motionFade } from '@/components/animations/motionBind';
 
 defineProps<{
-  item: any
+  item: Intervention
   isSelected: boolean
 }>()
 
 const emit = defineEmits<{
   (e: "toggle", item: any): void
 }>()
+
 const pressEffect = { scale: 0.97 };
-const motionFade = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-    transition: { duration: 0.2 }
-};
 </script>
 
 <template>
@@ -27,9 +24,9 @@ const motionFade = {
     </AnimatePresence>
 
     <div class="flex">
-      <img v-if="!item.images || item.images.length === 0 || item.images[0] === ''" :src="ph"
+      <img v-if="!item.image || item.image === ''" :src="ph"
         class="w-12 h-12 min-w-12 min-h-12 rounded-full" />
-      <img v-else :src="item.images[0]" class="w-12 h-12 min-w-12 min-h-12" />
+      <img v-else :src="item.image" class="w-12 h-12 min-w-12 min-h-12" />
     </div>
 
     <div class="flex-1 h-full flex flex-col justify-between">

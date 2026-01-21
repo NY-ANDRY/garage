@@ -7,9 +7,10 @@ import { DatePicker } from "primevue";
 import ColorPicker from 'primevue/colorpicker';
 import Button from "@/components/buttons/Button.vue";
 import { useFirestoreMutation } from "@/composables/useFirestoreMutation";
-import { useAuth } from '@/composables/useAuth';
+import { useAuthStore} from '@/stores/auth';
 
-const { user } = useAuth();
+
+const { user } = useAuthStore();
 
 const open = ref(false);
 const { mutate, loading, error } = useFirestoreMutation("voitures");
@@ -39,9 +40,9 @@ const handleSubmit = async () => {
     marque: marque.value,
     annee: annee.value,
     user: {
-      uid: user.value?.uid,
-      displayName: user.value?.displayName,
-      photoURL: user.value?.photoURL
+      uid: user?.uid,
+      displayName: user?.displayName,
+      photoURL: user?.photoURL
     }
   };
   try {
@@ -71,7 +72,7 @@ const handleSubmit = async () => {
         <TextInput label="Nom" v-model="nom" placeholder="Ex: Tesla Model 3" />
         <TextInput label="Description" v-model="description" placeholder="Ex: Voiture électrique" />
         <TextInput label="Marque" v-model="marque" placeholder="Ex: Tesla" />
-        <TextInput label="Année" v-model.number="annee" placeholder="Ex: 2023" />
+        <TextInput label="Année" v-model="annee" placeholder="Ex: 2023" />
 
         <div class="flex flex-col">
           <div class="flex justify-between">

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { motion } from "motion-v"
-import { useAuth } from '@/composables/useAuth';
+import { useAuthStore } from '@/stores/auth';
 import avatarr from '@/assets/svg/avatar.svg';
-const { user } = useAuth();
+const { user } = useAuthStore();
 const pressEffect = { scale: 0.8 }
 </script>
 
