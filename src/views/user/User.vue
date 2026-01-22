@@ -3,7 +3,7 @@ import { IonPage, IonContent, IonItem } from '@ionic/vue';
 import Header from '@/layout/Header.vue';
 import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
 import dogAnimation from '../../assets/animations/Cute_Doggie.json';
-import { useAuthStore} from '@/stores/auth';
+import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
 import Button from '@/components/buttons/Button.vue';
 import { useRouter } from 'vue-router';
@@ -13,9 +13,9 @@ const loading = ref(false);
 
 const router = useRouter();
 
-const handleLogout = () => {
-  logout();
-    router.replace('/auth/login');
+const handleLogout = async () => {
+  await logout();
+  router.replace('/auth/login');
 }
 
 </script>

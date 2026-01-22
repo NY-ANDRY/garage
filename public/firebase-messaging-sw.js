@@ -27,16 +27,55 @@ firebase.initializeApp({
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage((payload) => {
-  console.log(
-    '[firebase-messaging-sw.js] Received background message ',
-    payload
-  );
-  // Customize notification here
-  const notificationTitle = payload.notification.title;
-  const notificationOptions = {
-    body: payload.notification.body,
-    icon: '/test.jpg'
+  const title =
+    payload.notification?.title ||
+    payload.data?.title ||
+    "Nouvelle notification";
+
+  const options = {
+    body: payload.notification?.body || payload.data?.body || "",
+    icon: "/test.jpg",
+
+    actions: [
+      {
+        action: "open",
+        title: "Ouvrir",
+      },
+      {
+        action: "dismiss",
+        title: "Ignorer",
+      },
+    ],
+
+    data: {
+      url: payload.data?.url || "/",
+    },
   };
 
-  self.registration.showNotification(notificationTitle, notificationOptions);
+  self.registration.showNotification(title, options);
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+
+  const action = event.action; // nom du bouton cliqué
+  const url = event.notification.data?.url || "/";
+
+  if (action === "open") {
+    event.waitUntil(
+      clients.openWindow(url)
+    );
+  }
+
+  if (action === "dismiss") {
+    // rien à faire, juste fermer
+    console.log("Notification ignorée");
+  }
+
+  // clic sur la notif elle-même (pas sur un bouton)
+  if (!action) {
+    event.waitUntil(
+      clients.openWindow("/")
+    );
+  }
 });

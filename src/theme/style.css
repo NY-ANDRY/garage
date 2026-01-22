@@ -32,6 +32,10 @@ ion-content::part(scroll) {
   padding-right: 16px;
 }
 
+button-native {
+  padding: 0!;
+}
+
 ion-toolbar {
   box-shadow: none !important;
 }
