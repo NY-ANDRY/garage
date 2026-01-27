@@ -3,14 +3,14 @@ import { IonPage, IonContent } from '@ionic/vue';
 import Header from '@/layout/Header.vue';
 import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
 import catAnimation from '../../assets/animations/Car.json';
-import { useFirestoreData } from '@/composables/userFirestoreData';
+import { useFirestoreCollection } from '@/composables/userFirestoreCollection';
 import { Voiture } from '@/types/types';
 import { motion } from 'motion-v';
 import CarBox from '@/components/box/CarBox.vue';
 import Create from './CarCreate.vue';
 import { motionFade } from '@/components/animations/motionBind';
 
-const { data, loading } = useFirestoreData<Voiture>("voitures");
+const { data, loading } = useFirestoreCollection<Voiture>("voitures");
 
 </script>
 

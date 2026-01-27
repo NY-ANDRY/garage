@@ -29,6 +29,14 @@ export type Voiture = {
     user?: User;
 };
 
+export type Recuperation = {
+    id: string;
+    prix_total: number;
+    date: Timestamp;
+    user: User;
+    reparation: Reparation;
+}
+
 export type Intervention = {
     id: string;
     nom: string;

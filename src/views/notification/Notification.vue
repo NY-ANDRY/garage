@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonToolbar, } from '@ionic/vue';
-import { useFirestoreData } from '@/composables/userFirestoreData';
+import { useFirestoreCollection } from '@/composables/userFirestoreCollection';
 import { motion } from 'motion-v';
 import catAnimation from '../../assets/animations/Running_Cat.json';
 import NotificationBox from '@/components/box/NotificationBox.vue';
@@ -10,7 +10,7 @@ import { Notification } from '@/types/types';
 import { Preferences } from '@capacitor/preferences';
 import { motionFade } from '@/components/animations/motionBind';
 
-const { data, loading } = useFirestoreData<Notification>("notifications");
+const { data, loading } = useFirestoreCollection<Notification>("notifications");
 
 const getBackButtonText = () => {
   const win = window as any;

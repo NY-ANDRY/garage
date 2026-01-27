@@ -5,7 +5,11 @@ import { IonicVue } from '@ionic/vue';
 import { initializePush } from './config/messaging';
 import { i18n } from './locales/i18n';
 import PrimeVue from 'primevue/config';
-import { createPinia } from 'pinia'
+import { createPinia } from 'pinia';
+
+// import Aura from '@primeuix/themes/dist/';
+// import Aura from '@primeuix/themes/'; 
+// import PrimeVue from 'primevue/config';
 
 import '@ionic/vue/css/core.css';
 import '@ionic/vue/css/normalize.css';

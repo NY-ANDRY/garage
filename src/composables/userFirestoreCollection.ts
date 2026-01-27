@@ -2,7 +2,7 @@ import { ref as vueRef, onMounted, onUnmounted, watch, Ref } from "vue";
 import { collection, onSnapshot, Unsubscribe, DocumentData } from "firebase/firestore";
 import { firestore } from "../config/firebaseConfig";
 
-export function useFirestoreData<T extends DocumentData>(collectionName: string) {
+export function useFirestoreCollection<T extends DocumentData>(collectionName: string) {
   const data: Ref<(T & { id: string })[]> = vueRef([]);
   const loading = vueRef<boolean>(true);
 

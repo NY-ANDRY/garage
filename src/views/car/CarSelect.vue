@@ -2,7 +2,7 @@
 import { IonModal, IonContent } from '@ionic/vue';
 import { motion } from "motion-v";
 import { Voiture } from "@/types/types";
-import { useFirestoreData } from "@/composables/userFirestoreData";
+import { useFirestoreCollection } from "@/composables/userFirestoreCollection";
 import { ref } from "vue";
 import CarBox from '@/components/box/CarBox.vue';
 
@@ -12,7 +12,7 @@ const emit = defineEmits<{
 
 const c = ref<Voiture | null>(null);
 
-const { data } = useFirestoreData<Voiture>("voitures");
+const { data } = useFirestoreCollection<Voiture>("voitures");
 
 const open = ref(false);
 const closeModal = () => {

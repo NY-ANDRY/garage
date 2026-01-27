@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { IonPage, IonContent } from '@ionic/vue';
 import Header from '@/layout/Header.vue';
-import { useFirestoreData } from '@/composables/userFirestoreData';
+import { useFirestoreCollection } from '@/composables/userFirestoreCollection';
 import InterventionBox from "@/components/box/InterventionBox.vue";
 import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
 import catAnimation from '../../assets/animations/Running_Cat.json';
@@ -19,7 +19,7 @@ const { user } = useAuthStore();
 
 const { mutate, loading: loadingCreate, error: errorCreate } = useFirestoreMutation("reparations");
 
-const { data, loading } = useFirestoreData<Intervention>("interventions");
+const { data, loading } = useFirestoreCollection<Intervention>("interventions");
 
 
 const selectedIntervention = ref<Intervention[]>([]);
