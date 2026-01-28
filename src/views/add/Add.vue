@@ -73,6 +73,23 @@ const handleSubmit = async () => {
 
 }
 
+import { computed } from "vue";
+
+const totalInterventions = computed(() => {
+  return selectedIntervention.value.reduce(
+    (sum, item) => sum + (item.prix || 0),
+    0
+  );
+});
+
+const totalDuree = computed(() => {
+  return selectedIntervention.value.reduce(
+    (sum, item) => sum + (item.duree || 0),
+    0
+  );
+});
+
+
 </script>
 <template>
   <ion-page>
@@ -90,11 +107,47 @@ const handleSubmit = async () => {
             @toggle="toggleIntervention" />
         </motion.div>
 
-        <div class="flex gap-2 mt-4">
-          <Button @click="handleSubmit">
-            Créer
-          </Button>
+        
+
+        <div class="mt-6 p-4 rounded-xl bg-neutral-100 space-y-3">
+        <h3 class="text-lg font-semibold">🧾 Résumé</h3>
+
+        <!-- Voiture -->
+        <div v-if="car" class="text-sm text-neutral-600">
+          🚗 <span class="font-medium">{{ car.marque }} {{ car.modele }}</span>
         </div>
+
+        <!-- Interventions -->
+        <div v-if="selectedIntervention.length > 0" class="space-y-2">
+          <div
+            v-for="item in selectedIntervention"
+            :key="item.id"
+            class="flex justify-between text-sm"
+          >
+            <span>{{ item.nom }}</span>
+            <span>{{ $t('currency') }} {{ item.prix }}</span>
+          </div>
+        </div>
+
+        <div v-else class="text-sm text-neutral-400">
+          Aucune intervention sélectionnée
+        </div>
+
+        <hr />
+
+        <!-- Totaux -->
+        <div class="flex justify-between font-semibold">
+          <span>Total</span>
+          <span>{{ $t('currency') }} {{ totalInterventions }}</span>
+        </div>
+
+        <div class="text-xs text-neutral-500">
+          ⏱️ Durée totale : {{ totalDuree }} {{ $t('second') }}
+        </div>
+      </div>
+
+
+      
 
       </LoadingWrapper>
 
