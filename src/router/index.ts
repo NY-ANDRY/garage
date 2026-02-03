@@ -40,16 +40,4 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach(async (to) => {
-  const isLoggedIn = await getLoginState()
-
-  if (to.meta.requiresAuth && !isLoggedIn) {
-    return '/auth/login'
-  }
-
-  if (to.path.startsWith('/auth') && isLoggedIn) {
-    return '/tabs/home'
-  }
-})
-
 export default router
