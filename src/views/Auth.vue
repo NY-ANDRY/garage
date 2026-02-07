@@ -13,8 +13,7 @@ import { motion, AnimatePresence } from 'motion-v';
 import { motionFade, motionSwap } from '@/components/animations/motionBind';
 
 const loginForm = ref(true);
-const { user, login, register } = useAuthStore();
-const { mutate, loading: loadingCreate, error: errorCreate } = useFirestoreMutation("users");
+const { login, register } = useAuthStore();
 const router = useRouter();
 
 const loading = ref<boolean>(false);
@@ -33,7 +32,6 @@ const handleSubmit = async () => {
 
   loading.value = true;
   try {
-
 
     if (loginForm.value) {
       await login(email.value, password.value);

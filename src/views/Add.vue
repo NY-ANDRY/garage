@@ -4,23 +4,18 @@ import { IonPage, IonContent } from '@ionic/vue';
 import { useFirestoreCollection } from '@/composables/userFirestoreCollection';
 import InterventionBox from "@/components/interventions/InterventionBox.vue";
 import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
-import catAnimation from '../assets/animations/Running_Cat.json';
-import { motion } from 'motion-v';
-import { Intervention, Reparation, Voiture } from '@/types/types';
-import CarSelect from '../components/add/SelectCar.vue';
-import { useFirestoreMutation } from '@/composables/useFirestoreMutation';
-import { Timestamp } from 'firebase/firestore';
-import { useAuthStore } from '@/stores/auth';
-import { motionFade } from '@/components/animations/motionBind';
 import InterventionFacture from '@/components/interventions/InterventionFacture.vue';
+import catAnimation from '../assets/animations/Running_Cat.json';
 import Header from '@/layout/Header.vue';
+import { motion } from 'motion-v';
+import { Intervention, Voiture } from '@/types/types';
+import { motionFade } from '@/components/animations/motionBind';
+import { useReparationCreation } from '@/composables/useReparationCreation';
 
-const { user } = useAuthStore();
-const { mutate, loading: loadingCreate, error: errorCreate } = useFirestoreMutation("reparations");
+const { createReparation, loading: loadingCreate } = useReparationCreation()
 const { data, loading } = useFirestoreCollection<Intervention>("interventions");
 const car = ref<Voiture | null>(null);
 const selectedIntervention = ref<Intervention[]>([]);
-const toast = useToast()
 
 const setCar = (c: Voiture) => {
   car.value = c;
@@ -42,59 +37,14 @@ const isSelected = (id: any) => {
 }
 
 const handleSubmit = async () => {
-  if (car.value == null) {
-    toast.add({
-      title: 'Error',
-      description: 'veuillez selectionner une voiture',
-      color: 'error'
-    })
-    return;
-  }
-  if (!selectedIntervention || selectedIntervention.value.length <= 0) {
-    toast.add({
-      title: 'Error',
-      description: 'veuillez selectionner au moins 1 intervention',
-      color: 'error'
-    })
-    return;
-  }
-  if (user == null) {
-    return;
-  }
-
-  const newReparation: Reparation = {
-    voiture: car.value,
-    user: {
-      uid: user.uid,
-      displayName: user.displayName,
-      photoURL: user.photoURL
-    },
-    interventions: selectedIntervention.value,
-    statut: 0,
-    statut_histo: [],
-    paiements: [],
-    paiement_statut: 0,
-    paiement_total: 0,
-    total_a_payer: 0,
-    date: Timestamp.now()
-  }
-
-  try {
-    await mutate(newReparation, { type: 'set' });
-    toast.add({
-      title: 'Success',
-      description: 'Votre reparations est en attente.',
-      color: 'success'
-    })
-    car.value = null;
-    selectedIntervention.value = [];
-  } catch (error) {
-    toast.add({
-      title: 'Error',
-      description: 'réessayez plus tard',
-      color: 'error'
-    })
-  }
+  createReparation(
+    car.value,
+    selectedIntervention.value,
+    () => {
+      car.value = null
+      selectedIntervention.value = []
+    }
+  )
 }
 
 </script>

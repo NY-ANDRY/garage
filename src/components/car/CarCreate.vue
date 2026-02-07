@@ -1,94 +1,61 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { IonModal, IonContent } from '@ionic/vue';
-import { useFirestoreMutation } from "@/composables/useFirestoreMutation";
-import { useAuthStore } from '@/stores/auth';
-import { Voiture } from "@/types/types";
+import { ref } from 'vue'
+import { IonModal, IonContent } from '@ionic/vue'
+import { useVoitureCreation } from '@/composables/useVoitureCreation'
+import { useFirestoreCollection } from '@/composables/userFirestoreCollection'
+import { computed } from 'vue'
 
-const marques = ref([
-  'Audi',
-  'BMW',
-  'Chevrolet',
-  'Citroën',
-  'Ford',
-  'Honda',
-  'Hyundai',
-  'Kia',
-  'Mazda',
-  'Mercedes-Benz',
-  'Nissan',
-  'Peugeot',
-  'Renault',
-  'Subaru',
-  'Tesla',
-  'Toyota',
-  'Volkswagen',
-  'Volvo'
-])
+const { data: marquesFire, loading: loadingMarques } = useFirestoreCollection('marques');
+const marques = computed(() => (marquesFire.value.map((v) => v.nom)))
 
-const currentYear = new Date().getFullYear();
+const currentYear = new Date().getFullYear()
+const annees = Array.from({ length: 50 }, (_, i) => String(currentYear - i))
 
-const annees = Array.from({ length: 50 }, (_, i) =>
-  String(currentYear - i)
-);
-const toast = useToast()
+const open = ref(false)
 
+const numero = ref('')
+const nom = ref('')
+const description = ref('...')
+const url_img = ref('')
+const couleurHex = ref('#00c950')
+const marque = ref('')
+const annee = ref('')
 
-const { user } = useAuthStore();
-
-const open = ref(false);
-const { mutate, loading, error } = useFirestoreMutation("voitures");
-
-const numero = ref('');
-const nom = ref('');
-const description = ref('...');
-const url_img = ref('');
-const couleurHex = ref('#00c950');
-const marque = ref('');
-const annee = ref('');
+const { createVoiture, loading } = useVoitureCreation()
 
 const closeModal = () => {
-  open.value = false;
-};
+  open.value = false
+}
 
-const handleSubmit = async () => {
+const resetForm = () => {
+  numero.value = ''
+  nom.value = ''
+  description.value = '...'
+  url_img.value = ''
+  couleurHex.value = '#00c950'
+  marque.value = ''
+  annee.value = ''
+}
 
-  const newCar: Partial<Voiture> = {
-    numero: numero.value,
-    nom: nom.value,
-    description: description.value,
-    url_img: url_img.value,
-    couleurHex: couleurHex.value.slice(1),
-    marque: marque.value,
-    annee: annee.value,
-    user: {
-      uid: user?.uid,
-      displayName: user?.displayName,
-      photoURL: user?.photoURL
+const handleSubmit = () => {
+  createVoiture(
+    {
+      numero: numero.value,
+      nom: nom.value,
+      description: description.value,
+      url_img: url_img.value,
+      couleurHex: couleurHex.value,
+      marque: marque.value,
+      annee: annee.value
+    },
+    () => {
+      closeModal()
+      resetForm()
     }
-  };
-
-  console.log(newCar);
-
-  try {
-    await mutate(newCar, { type: "set" });
-    closeModal();
-    toast.add({
-      title: 'Success',
-      description: 'Voiture enregistrer.',
-      color: 'success'
-    })
-  } catch (err) {
-
-    toast.add({
-      title: 'Error',
-      description: 'veuillez selectionner une voiture',
-      color: 'error',
-      orientation: 'vertical'
-    })  }
-};
-
+  )
+}
 </script>
+
 
 <template>
   <div @click="open = true"

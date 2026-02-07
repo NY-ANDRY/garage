@@ -2,6 +2,9 @@
 import { motion } from "motion-v";
 import ph from "../../assets/svg/ph-2.svg";
 import { Voiture } from "@/types/types";
+import { useFirestoreCollection } from "@/composables/userFirestoreCollection";
+
+const { data: vIMGS, loading: loadingVIMGS } = useFirestoreCollection('IMGvoitures');
 
 const props = defineProps<{ item: Voiture }>();
 const emit = defineEmits<{
