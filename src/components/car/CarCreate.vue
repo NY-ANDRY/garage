@@ -38,6 +38,8 @@ const resetForm = () => {
 }
 
 const handleSubmit = () => {
+  console.log("1");
+  
   createVoiture(
     {
       numero: numero.value,

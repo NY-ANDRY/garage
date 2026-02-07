@@ -11,6 +11,7 @@ import { motion } from 'motion-v';
 import { Intervention, Voiture } from '@/types/types';
 import { motionFade } from '@/components/animations/motionBind';
 import { useReparationCreation } from '@/composables/useReparationCreation';
+import SelectCar from '@/components/add/SelectCar.vue';
 
 const { createReparation, loading: loadingCreate } = useReparationCreation()
 const { data, loading } = useFirestoreCollection<Intervention>("interventions");
@@ -58,7 +59,7 @@ const handleSubmit = async () => {
 
         <h6 class="font-inter-l capitalize text-sm text-neutral-400">voiture</h6>
         <div class="flex py-0">
-          <CarSelect @select="setCar" :car="car" />
+          <SelectCar @select="setCar" :car="car" />
         </div>
 
         <h6 class="font-inter-l capitalize text-sm text-neutral-400">interventions</h6>

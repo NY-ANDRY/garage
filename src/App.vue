@@ -5,7 +5,7 @@ import { IonApp, IonRouterOutlet } from '@ionic/vue';
 
 <template>
   <ion-app>
-    <UApp>
+    <UApp :toaster="{ position: 'top-right', duration: 3000 }">
       <ion-router-outlet />
     </UApp>
   </ion-app>
