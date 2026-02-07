@@ -2,7 +2,7 @@
 import { IonPage, IonContent } from '@ionic/vue';
 import Header from '@/layout/Header.vue';
 import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
-import catAnimation from '../../assets/animations/Cat_is_sleeping_and_rolling.json';
+import catAnimation from '../assets/animations/Cat_is_sleeping_and_rolling.json';
 import { ref } from 'vue';
 import { useFirestoreDoc } from '@/composables/useFirestoreDoc';
 import { Recuperation, Reparation } from '@/types/types';

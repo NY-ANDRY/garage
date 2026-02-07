@@ -3,8 +3,8 @@ import { onMounted, ref } from 'vue';
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonToolbar, } from '@ionic/vue';
 import { useFirestoreCollection } from '@/composables/userFirestoreCollection';
 import { motion } from 'motion-v';
-import catAnimation from '../../assets/animations/Running_Cat.json';
-import NotificationBox from '@/components/box/NotificationBox.vue';
+import catAnimation from '../assets/animations/Running_Cat.json';
+import NotificationBox from '@/components/notifications/NotificationBox.vue';
 import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
 import { Notification } from '@/types/types';
 import { Preferences } from '@capacitor/preferences';
@@ -61,23 +61,9 @@ const sendToken = async () => {
 
       <LoadingWrapper :loading="loading" :animationData="catAnimation" :width="400" :height="400">
 
-        <motion.div key="data" v-bind="motionFade" class="grid grid-cols-1 gap-3">
+        <motion.div key="data" v-bind="motionFade" class="grid grid-cols-1 gap-4">
           <NotificationBox v-for="item in data" :key="item.id" :item="item" />
         </motion.div>
-
-        <div class="flex flex-col">
-          <ion-item>
-            <p style="word-break: break-all; color: var(--ion-color-primary);">
-              {{ savedToken || 'Chargement ou aucun token...' }}
-            </p>
-          </ion-item>
-
-          <ion-button @click="sendToken">
-            send
-          </ion-button>
-
-          <ion-input :value="savedToken"></ion-input>
-        </div>
 
       </LoadingWrapper>
 

@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { IonPage, IonContent } from '@ionic/vue';
 import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
-import dogAnimation from '../../assets/animations/Car_revolving_animation.json';
+import dogAnimation from '../assets/animations/Car_revolving_animation.json';
 import { useAuthStore} from '@/stores/auth';
 import { ref } from 'vue';
 import { useFirestoreMutation } from '@/composables/useFirestoreMutation';
-import { User } from '@/types/types';
-import { Preferences } from '@capacitor/preferences';
 import { useRouter } from 'vue-router';
 import Button from '@/components/buttons/Button.vue';
 import ButtonSecondary from '@/components/buttons/ButtonSecondary.vue';

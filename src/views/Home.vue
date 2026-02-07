@@ -2,7 +2,7 @@
 import { IonPage, IonContent } from '@ionic/vue';
 import Header from '@/layout/Header.vue';
 import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
-import catAnimation from '../../assets/animations/Car.json';
+import catAnimation from '../assets/animations/Car.json';
 import { Reparation } from '@/types/types';
 import { useFirestoreCollection } from '@/composables/userFirestoreCollection';
 
@@ -29,7 +29,7 @@ const { data, loading } = useFirestoreCollection<Reparation>("reparations");
           <!-- Voiture -->
           <div class="flex justify-between items-center">
             <div class="font-semibold text-lg">
-              🚗 {{ rep.voiture.marque }} {{ rep.voiture.nom }}
+              {{ rep.voiture.marque }} {{ rep.voiture.nom }}
             </div>
             <span class="text-xs text-neutral-400">
               {{ rep.date?.toDate().toLocaleDateString() }}

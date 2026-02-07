@@ -2,7 +2,7 @@
 import { IonPage, IonContent, IonItem } from '@ionic/vue';
 import Header from '@/layout/Header.vue';
 import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
-import dogAnimation from '../../assets/animations/Cute_Doggie.json';
+import dogAnimation from '../assets/animations/Cute_Doggie.json';
 import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
 import Button from '@/components/buttons/Button.vue';

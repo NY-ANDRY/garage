@@ -17,14 +17,12 @@ const handleClick = () => {
 </script>
 
 <template>
-  <motion.div @click="handleClick" :while-press="pressEffect" layout class="box relative flex flex-col h-full justify-between p-3 rounded-xl gap-3
-           transition-all overflow-hidden bg-neutral-50 border-r-10 w-full"
-    :style="{ borderColor: `#${item.couleurHex}` }">
+  <motion.div @click="handleClick" :while-press="pressEffect" layout class="box relative flex flex-col justify-between pl-3 pr-1 gap-1
+           transition-all overflow-hidden border-l-6 w-full rounded" :style="{ borderColor: `#${item.couleurHex}` }">
 
-    <img v-if="item.url_img || item.url_img !== ''" :src="ph" class="w-full max-w-full max-h-36 rounded-sm" />
-    <!-- <img v-else :src="ph" class="w-full max-w-full max-h-36 rounded-sm" /> -->
+    <img v-if="item.url_img || item.url_img !== ''" :src="ph" class="w-full max-w-full max-h-36" />
 
-    <div class="flex-1 flex flex-col py-2 gap-1">
+    <div class="flex-1 flex flex-col py-0 gap-0">
 
       <div class="flex items-center justify-between font-[inter-m]">
         <div class="flex">{{ item.nom }}</div>
@@ -36,7 +34,6 @@ const handleClick = () => {
           {{ item.description }}
         </div>
         <div class="flex rounded-sm overflow-hidden">
-          <!-- <ColorPicker disabled v-model="color" /> -->
         </div>
       </div>
 

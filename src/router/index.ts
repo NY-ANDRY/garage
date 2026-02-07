@@ -2,8 +2,7 @@ import { createRouter, createWebHistory } from '@ionic/vue-router'
 import { RouteRecordRaw } from 'vue-router'
 import TabsPage from '../layout/Nav.vue'
 import TabsAuth from '../layout/NavAuth.vue'
-import Notification from '@/views/notification/Notification.vue'
-import { getLoginState } from '@/stores/auth'
+import Notification from '@/views/Notification.vue'
 
 const routes: Array<RouteRecordRaw> = [
   { path: '/', redirect: '/tabs/home' },
@@ -16,21 +15,19 @@ const routes: Array<RouteRecordRaw> = [
     meta: { requiresAuth: true },
     children: [
       { path: '', redirect: '/tabs/home' },
-      { path: 'home', component: () => import('@/views/home/Home.vue') },
-      { path: 'car', component: () => import('@/views/car/Car.vue') },
-      { path: 'add', component: () => import('@/views/add/Add.vue') },
-      { path: 'pay', component: () => import('@/views/pay/Pay.vue') },
-      { path: 'user', component: () => import('@/views/user/User.vue') }
+      { path: 'home', component: () => import('@/views/Home.vue') },
+      { path: 'car', component: () => import('@/views/Car.vue') },
+      { path: 'add', component: () => import('@/views/Add.vue') },
+      { path: 'pay', component: () => import('@/views/Pay.vue') },
+      { path: 'user', component: () => import('@/views/User.vue') }
     ]
   },
-
   {
     path: '/auth/',
     component: TabsAuth,
     children: [
       { path: '', redirect: '/auth/login' },
-      { path: 'login', component: () => import('@/views/auth/Login.vue') },
-      { path: 'signin', component: () => import('@/views/auth/SignIn.vue') }
+      { path: 'login', component: () => import('@/views/Auth.vue') }
     ]
   }
 ]

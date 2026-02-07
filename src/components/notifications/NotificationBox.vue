@@ -13,7 +13,7 @@ const { mutate, loading, error } = useFirestoreMutation("notifications");
 
 const selected = ref<boolean>(false);
 
-const pressEffect = { scale: 0.97 };
+const pressEffect = { scale: 0.98 };
 
 const handleRead = () => {
   if (!props.item.read) {
@@ -26,23 +26,17 @@ const handleRead = () => {
 </script>
 
 <template>
-  <motion.div @click="handleRead" :while-press="pressEffect" layout class="relative flex h-full justify-between p-2.5 pr-5 rounded-xl gap-3
-           transition-all overflow-hidden bg-neutral-50">
+  <motion.div @click="handleRead" :while-press="pressEffect" layout
+    class="relative flex h-full justify-between pr-5 gap-2 transition-all overflow-hidden">
 
     <AnimatePresence mode="wait">
       <motion.div v-if="!item.read" v-bind="motionFade"
-        class="absolute top-2 right-2 w-3.5 h-3.5 bg-cyan-300 rounded-full"></motion.div>
+        class="absolute top-2 right-2 w-2 h-2 bg-emerald-400 rounded-full"></motion.div>
     </AnimatePresence>
-
-
-    <div class="flex flex-col">
-      <img v-if="!item.url_img || item.url_img === ''" :src="ph" class="w-12 h-12 min-w-12 min-h-12 rounded-full" />
-      <img v-else :src="item.url_img" class="w-12 h-12 min-w-12 min-h-12" />
-    </div>
 
     <div class="flex-1 h-full flex flex-col">
 
-      <div class="flex text-xl  capitalize pt-1">
+      <div class="flex text-lg capitalize pt-1">
         {{ item.title }}
       </div>
       <div class="flex text-neutral-400 text-sm transition-all"
@@ -50,10 +44,6 @@ const handleRead = () => {
         {{ item.description }}
       </div>
 
-
-    </div>
-
-    <div class="flex justify-between gap-2 text-neutral-400 text-sm">
 
     </div>
   </motion.div>

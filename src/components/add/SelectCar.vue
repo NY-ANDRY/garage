@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { IonModal, IonContent } from '@ionic/vue';
-import { motion } from "motion-v";
 import { Voiture } from "@/types/types";
 import { useFirestoreCollection } from "@/composables/userFirestoreCollection";
 import { ref } from "vue";
-import CarBox from '@/components/box/CarBox.vue';
+import CarBox from '@/components/car/CarBox.vue';
 
+const props = defineProps<{ car: Voiture | null }>();
 const emit = defineEmits<{
   (e: "select", voiture: Voiture): void
 }>()
 
-const c = ref<Voiture | null>(null);
+// const c = ref<Voiture | null>(null);
 
 const { data } = useFirestoreCollection<Voiture>("voitures");
 
@@ -22,7 +22,6 @@ const closeModal = () => {
 const pressEffect = { scale: 0.97 };
 
 const handleSelect = (v: Voiture) => {
-  c.value = v;
   emit('select', v);
   closeModal();
 }
@@ -31,12 +30,12 @@ const handleSelect = (v: Voiture) => {
 
 <template>
 
-  <div class="flex w-full pb-4" @click="open = true">
+  <div class="flex w-full pb-0" @click="open = true">
 
-    <CarBox v-if="c" :item="c" />
+    <CarBox v-if="car" :item="car" />
 
     <div v-else
-      class="flex items-center justify-center w-full h-32 min-h-20 border-dashed rounded-xl border-2 border-neutral-100 text-neutral-400 mb-4">
+      class="flex rounded-xl items-center justify-center w-full h-20 min-h-20 border-dashed border-2 border-neutral-200 text-neutral-400">
       Selection de voiture
     </div>
 
@@ -45,10 +44,10 @@ const handleSelect = (v: Voiture) => {
   <ion-modal :is-open="open" initial-breakpoint="0.98" :breakpoints="[0, 0.98, 0.98]" @didDismiss="closeModal"
     class="custom-modal">
     <ion-content class="p-0 overflow-hidden">
-      <div class="bg-white rounded-t-3xl p-6 space-y-4">
+      <div class="bg-white rounded-t-3xl py-6 space-y-4">
 
         <div class="grid grid-cols-1 gap-3" v-for="voiture in data">
-          <div  @click="() => { handleSelect(voiture) }">
+          <div @click="() => { handleSelect(voiture) }">
             <CarBox :item="voiture" />
           </div>
         </div>
