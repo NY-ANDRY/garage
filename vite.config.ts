@@ -6,14 +6,17 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import ui from '@nuxt/ui/vite'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     ui(),
     legacy({
+      // On monte le curseur pour Safari : Safari 12 ne comprend pas le BigInt (0n)
+      // En forçant safari >= 14, on élimine l'erreur de build esbuild
       targets: ['edge >= 79', 'firefox >= 68', 'chrome >= 67', 'safari >= 14'],
-      additionalLegacyPolyfills: ['regenerator-runtime/runtime']
+      additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
+      // Empêche le plugin legacy de tenter de transformer les BigInt de manière incorrecte
+      modernPolyfills: true 
     })
   ],
   resolve: {
@@ -25,32 +28,31 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom'
   },
-  server: {
-    host: true,
-    port: 5173,
-  },
   build: {
-    // On aligne le target sur es2020 pour supporter les BigInt literals (0n)
-    target: 'es2020', 
-    chunkSizeWarningLimit: 1600, // Augmenté pour éviter les alertes inutiles sur les gros bundles UI
+    target: 'es2020', // Crucial pour le support du 0n
+    cssTarget: 'chrome61', // Évite des problèmes de minification CSS sur certains navigateurs
+    chunkSizeWarningLimit: 2000,
     rollupOptions: {
       output: {
-        // Logique de split optimisée pour éviter les dépendances circulaires
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            if (id.includes('@ionic')) return 'vendor-ionic';
-            if (id.includes('vue')) return 'vendor-vue';
-            if (id.includes('lottie')) return 'vendor-lottie';
-            return 'vendor-others';
-          }
-        }
+        // Solution radicale pour les Circular Chunks : 
+        // On laisse Vite gérer le découpage automatiquement ou on utilise une approche plus simple
+        manualChunks: undefined, 
       }
     }
   },
+  // On force esbuild à accepter le BigInt partout
+  esbuild: {
+    supported: {
+      'bigint': true
+    },
+    target: 'es2020'
+  },
   optimizeDeps: {
     esbuildOptions: {
-      // Support des BigInt pendant la phase de développement/optimisation
       target: 'es2020',
+      supported: {
+        'bigint': true
+      }
     },
   },
 })
