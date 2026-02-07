@@ -3,10 +3,13 @@ http://ionicframework.com/docs/theming/ */
 
 :root {
 
+  /* --main-bg: #FAF9F9; */
+  --main-bg: #fff;
+
   --nav-svg-fill-active: #323232;
-  --nav-svg-fill-inactive: #ffffff;
+  --nav-svg-fill-inactive: var(--main-bg);
   --nav-svg-stroke-active: #323232;
-  --nav-svg-stroke-inactive: #ffffff;
+  --nav-svg-stroke-inactive: var(--main-bg);
   --style-color-default: #242424;
   --style-color-title: #262626;
 

@@ -18,9 +18,9 @@ defineProps({
           <slot></slot>
         </div>
         <div class="flex gap-0">
-          <ion-item :routerLink="'/notifications'">
+          <ion-item :routerLink="'/notifications'" class="item-red">
             <div class="flex abc w-full h-full">
-              <NotificationIcon></NotificationIcon>
+              <NotificationIcon />
             </div>
           </ion-item>
         </div>

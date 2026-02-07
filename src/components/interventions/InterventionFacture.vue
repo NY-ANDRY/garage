@@ -35,7 +35,7 @@ const data = computed(() => props.items)
 <template>
   <div v-if="!items || items.length <= 0" class="flex"></div>
   <div v-else class="pt-2 pb-4 bg-white rounded-lg w-full max-w-md mx-auto">
-    <UTable :data="data" :columns="columns" sticky class="mb-4" />
+    <UTable :data="data" :columns="columns" sticky class="mb-4 px-2" />
 
     <div class="flex justify-end w-full text-sm">
       <div class="flex flex-col w-1/2">

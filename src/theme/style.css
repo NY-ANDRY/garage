@@ -2,7 +2,32 @@ body {
   font-family: 'inter';
   color: var(--style-color-default);
 }
-
+/* ion-content {
+  background-color: #000;
+} */
+ion-content::part(scroll) {
+  background-color: var(--main-bg);
+}
+ion-content {
+  background-color: var(--main-bg);
+}
+ion-header {
+  background-color: var(--main-bg);
+}
+ion-toolbar {
+  --background: var(--main-bg);
+  --color: white;
+}
+ion-tab-bar {
+  --background: var(--main-bg);
+}
+.item-red {
+  --background: var(--main-bg);
+  --color: white;
+}
+.toolbar-red {
+  --color: #323232;
+}
 .default-screen {
   min-height: 100%;
   min-width: 100%;

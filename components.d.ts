@@ -27,6 +27,7 @@ declare module 'vue' {
     InterventionFacture: typeof import('./src/components/interventions/InterventionFacture.vue')['default']
     ListIcon: typeof import('./src/components/icons/ListIcon.vue')['default']
     LoadingWrapper: typeof import('./src/components/animations/LoadingWrapper.vue')['default']
+    MainWrapper: typeof import('./src/components/wrapper/MainWrapper.vue')['default']
     Menu2Icon: typeof import('./src/components/icons/Menu2Icon.vue')['default']
     MenuIcon: typeof import('./src/components/icons/MenuIcon.vue')['default']
     NotificationBox: typeof import('./src/components/notifications/NotificationBox.vue')['default']
