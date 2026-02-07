@@ -32,5 +32,12 @@ export default defineConfig({
   build: {
     target: 'esnext', // permet BigInt
     chunkSizeWarningLimit: 2000, // optionnel, réduit les warnings de gros chunks
+    rollupOptions: {
+    output: {
+      manualChunks(id) {
+        if (id.includes('node_modules')) return 'vendor';
+      }
+    }
+  }
   }
 })
