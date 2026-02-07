@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { IonPage, IonContent } from '@ionic/vue';
+import { useAuthStore } from '@/stores/auth';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { motion, AnimatePresence } from 'motion-v';
+import { motionFade, motionSwap } from '@/components/animations/motionBind';
 import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
 import dogAnimation from '../assets/animations/Car_revolving_animation.json';
-import { useAuthStore} from '@/stores/auth';
-import { ref } from 'vue';
-import { useFirestoreMutation } from '@/composables/useFirestoreMutation';
-import { useRouter } from 'vue-router';
 import Button from '@/components/buttons/Button.vue';
 import ButtonSecondary from '@/components/buttons/ButtonSecondary.vue';
 import TextInput from '@/components/input/TextInput.vue';
-import { motion, AnimatePresence } from 'motion-v';
-import { motionFade, motionSwap } from '@/components/animations/motionBind';
 
 const loginForm = ref(true);
 const { login, register } = useAuthStore();
@@ -76,8 +75,8 @@ const handleSubmit = async () => {
               <div class="flex w-full gap-2">
                 <ButtonSecondary @click="toggleForm">
                   <AnimatePresence mode="popLayout">
-
-                    <motion.div v-if="loginForm" v-bind="motionFade" class="flex items-center justify-center">Register</motion.div>
+                    <motion.div v-if="loginForm" v-bind="motionFade" class="flex items-center justify-center">Register
+                    </motion.div>
                     <motion.div v-else v-bind="motionFade" class="flex items-center justify-center">Login</motion.div>
                   </AnimatePresence>
                 </ButtonSecondary>

@@ -25,5 +25,8 @@ export default defineConfig({
   server: {
     host: true,
     port: 5173,
+  },
+  build: {
+    target: 'esnext' // permet BigInt et d'autres features modernes
   }
 })
