@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { IonModal, IonContent } from '@ionic/vue'
+import { ref, computed } from 'vue'
+import { IonModal, IonContent, IonSelect, IonSelectOption } from '@ionic/vue'
 import { useVoitureCreation } from '@/composables/useVoitureCreation'
 import { useFirestoreCollection } from '@/composables/userFirestoreCollection'
-import { computed } from 'vue'
 
-const { data: marquesFire, loading: loadingMarques } = useFirestoreCollection('marques');
-const marques = computed(() => (marquesFire.value.map((v) => v.nom)))
+const { data: marquesFire, loading: loadingMarques } = useFirestoreCollection('marques')
+const marques = computed(() => !loadingMarques.value ? marquesFire.value.map(v => v.nom) : [])
 
 const currentYear = new Date().getFullYear()
 const annees = Array.from({ length: 50 }, (_, i) => String(currentYear - i))
@@ -23,9 +22,7 @@ const annee = ref('')
 
 const { createVoiture, loading } = useVoitureCreation()
 
-const closeModal = () => {
-  open.value = false
-}
+const closeModal = () => { open.value = false }
 
 const resetForm = () => {
   numero.value = ''
@@ -38,23 +35,18 @@ const resetForm = () => {
 }
 
 const handleSubmit = () => {
-  console.log("1");
-  
-  createVoiture(
-    {
-      numero: numero.value,
-      nom: nom.value,
-      description: description.value,
-      url_img: url_img.value,
-      couleurHex: couleurHex.value,
-      marque: marque.value,
-      annee: annee.value
-    },
-    () => {
-      closeModal()
-      resetForm()
-    }
-  )
+  createVoiture({
+    numero: numero.value,
+    nom: nom.value,
+    description: description.value,
+    url_img: url_img.value,
+    couleurHex: couleurHex.value,
+    marque: marque.value,
+    annee: annee.value
+  }, () => {
+    closeModal()
+    resetForm()
+  })
 }
 </script>
 
@@ -65,7 +57,7 @@ const handleSubmit = () => {
     Créer une nouvelle voiture
   </div>
 
-  <ion-modal :is-open="open" initial-breakpoint="0.96" :breakpoints="[0, 0.30, 0.96]" @didDismiss="closeModal"
+  <ion-modal :is-open="open" initial-breakpoint="0.96" :breakpoints="[0, 0.80, 0.96]" @didDismiss="closeModal"
     class="custom-modalll">
     <ion-content class="p-0 overflow-hidden">
       <div class="bg-white rounded-t-3xl p-6 space-y-4 flex flex-col gap-1">
@@ -91,13 +83,21 @@ const handleSubmit = () => {
         <div class="flex gap-2">
           <UFormGroup label="Marque" class="w-full mb-2 flex flex-col gap-1">
             <div class="capitalize text-neutral-400 text font-inter-m">marque</div>
-            <USelect v-model="marque" :items="marques" class="w-full py-3! rounded-lg! px-3!" />
+            <ion-select v-model="marque" interface="popover" placeholder="marque"
+              class="w-full border border-neutral-300 rounded-lg px-2">
+              <ion-select-option v-for="m in marques" :key="m" :value="m">{{ m }}</ion-select-option>
+            </ion-select>
           </UFormGroup>
+
           <UFormGroup label="Année" class="w-full mb-2 flex flex-col gap-1">
             <div class="capitalize text-neutral-400 text font-inter-m">année</div>
-            <USelect v-model="annee" :items="annees" class="w-full py-3! rounded-lg! px-3!" />
+            <ion-select v-model="annee" interface="popover" placeholder="année"
+              class="w-full border border-neutral-300 rounded-lg px-2">
+              <ion-select-option v-for="a in annees" :key="a" :value="a">{{ a }}</ion-select-option>
+            </ion-select>
           </UFormGroup>
         </div>
+
 
         <UFormGroup label="Couleur" class="w-full mb-2 flex flex-col gap-1">
           <div class="capitalize text-neutral-400 text font-inter-m">couleur</div>
@@ -117,5 +117,13 @@ const handleSubmit = () => {
   </ion-modal>
 </template>
 
+<style>
+ion-select::part(icon) {
+  display: none;
+}
 
-<style></style>
+ion-select {
+  --highlight-color: transparent;
+  --background-focused: transparent;
+}
+</style>
