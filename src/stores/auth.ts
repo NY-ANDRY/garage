@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
+  User as FirebaseUser,
   UserCredential
 } from 'firebase/auth'
 import { Preferences } from '@capacitor/preferences'
@@ -13,68 +14,94 @@ import { User } from '@/types/types'
 import { useFirestoreMutation } from '@/composables/useFirestoreMutation'
 
 const { mutate } = useFirestoreMutation("users")
-
 const AUTH_KEY = 'is_logged_in'
+const USER_KEY = 'current_user'
 
+// Sauvegarde l'état de connexion
 const setLoginState = async (value: boolean) => {
-  await Preferences.set({
-    key: AUTH_KEY,
-    value: value ? '1' : '0'
-  })
+  await Preferences.set({ key: AUTH_KEY, value: value ? '1' : '0' })
 }
 
+// Récupère l'état de connexion
 export const getLoginState = async (): Promise<boolean> => {
   const { value } = await Preferences.get({ key: AUTH_KEY })
   return value === '1'
 }
 
-const setFcmToken = async (uc: UserCredential) => {
-  const { value } = await Preferences.get({ key: 'fcm_token' })
+// Convertit un FirebaseUser en notre User et le sauvegarde
+const mapFirebaseUser = async (uc: FirebaseUser) => {
+  const { value: fcmToken } = await Preferences.get({ key: 'fcm_token' })
 
-  const u: User = {
-    uid: uc.user.uid,
-    email: uc.user.email,
-    displayName: uc.user.displayName,
-    photoURL: uc.user.phoneNumber,
-    fcmToken: value
+  let displayName = uc.displayName
+  if (!displayName || displayName === "") {
+    displayName = uc.email?.split('@')[0] ?? 'naruto'
   }
 
-  await mutate(u, { type: 'set', id: uc.user.uid })
+  const u: User = {
+    uid: uc.uid,
+    email: uc.email,
+    displayName,
+    photoURL: uc.photoURL,
+    fcmToken
+  }
+
+  await mutate(u, { type: 'set', id: uc.uid })
+  await Preferences.set({ key: USER_KEY, value: JSON.stringify(u) })
+  return u
+}
+
+// Récupère l'utilisateur stocké localement
+export const getStoredUser = async (): Promise<User | null> => {
+  const { value } = await Preferences.get({ key: USER_KEY })
+  return value ? JSON.parse(value) : null
 }
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<User | null>(null)
   const initialized = ref(false)
 
+  // Initialisation au lancement
+  const init = async () => {
+    const storedUser = await getStoredUser()
+    if (storedUser) user.value = storedUser
+    initialized.value = true
+  }
+
   onAuthStateChanged(auth, async (currentUser) => {
-    user.value = currentUser
-    await setLoginState(!!currentUser)
+    if (currentUser) {
+      user.value = await mapFirebaseUser(currentUser)
+      await setLoginState(true)
+    } else {
+      user.value = null
+      await Preferences.remove({ key: USER_KEY })
+      await setLoginState(false)
+    }
     initialized.value = true
   })
 
   const login = async (email: string, pass: string) => {
     const result = await signInWithEmailAndPassword(auth, email, pass)
-    user.value = result.user
+    user.value = await mapFirebaseUser(result.user)
     await setLoginState(true)
-    await setFcmToken(result)
   }
 
   const register = async (email: string, pass: string) => {
     const result = await createUserWithEmailAndPassword(auth, email, pass)
-    user.value = result.user
+    user.value = await mapFirebaseUser(result.user)
     await setLoginState(true)
-    await setFcmToken(result)
   }
 
   const logout = async () => {
     await signOut(auth)
     user.value = null
+    await Preferences.remove({ key: USER_KEY })
     await setLoginState(false)
   }
 
   return {
     user,
     initialized,
+    init,
     login,
     register,
     logout

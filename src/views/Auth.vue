@@ -5,12 +5,11 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { motion, AnimatePresence } from 'motion-v';
 import { motionFade, motionSwap } from '@/components/animations/motionBind';
-import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
-import dogAnimation from '../assets/animations/Car_revolving_animation.json';
-import Button from '@/components/buttons/Button.vue';
 import ButtonSecondary from '@/components/buttons/ButtonSecondary.vue';
 import TextInput from '@/components/input/TextInput.vue';
+import { useToast } from '@nuxt/ui/runtime/composables/useToast';
 
+const toast = useToast();
 const loginForm = ref(true);
 const { login, register } = useAuthStore();
 const router = useRouter();
@@ -40,7 +39,11 @@ const handleSubmit = async () => {
 
     router.replace('/tabs/home');
   } catch (error: any) {
-    alert("Erreur : " + error.message);
+      toast.add({
+        title: 'Error',
+        description: error.message,
+        color: 'error'
+      })
   } finally {
     loading.value = false;
   }
@@ -52,42 +55,43 @@ const handleSubmit = async () => {
   <ion-page>
     <ion-content :fullscreen="true">
 
-      <LoadingWrapper :loading="loading" :animationData="dogAnimation" :width="400" :height="400">
-
-        <div class="flex flex-col flex-1 pb-28 items-center justify-center p-4">
-
-          <div class="w-full min-h-full flex flex-col gap-6 items-center">
-            <AnimatePresence mode="popLayout">
+        <div class="flex flex-col w-full min-h-full">
+          
+          <div class="flex flex-col flex-1 pb-12 items-center justify-center p-4 gap-8">
+            
+            <div class="w-full min-h-full flex flex-col gap-6 items-center">
+              <AnimatePresence mode="popLayout">
               <motion.div v-if="loginForm" v-bind="motionSwap"
-                class="w-full text-2xl tracking-wider font-[interT-b] uppercase">Sign In</motion.div>
-              <motion.div v-else v-bind="motionSwap" class="w-full text-2xl tracking-wider font-[interT-b] uppercase">
-                Register
-              </motion.div>
+                class="w-full text-2xl tracking-wider font-[inter-sb] capitalize">Sign In</motion.div>
+                <motion.div v-else v-bind="motionSwap" class="w-full text-2xl tracking-wider font-[inter-sb] capitalize">
+                  Register
+                </motion.div>
             </AnimatePresence>
 
             <TextInput label="Email" v-model="email" type="text" placeholder="email@gmail.com" />
             <TextInput label="Password" v-model="password" type="password" placeholder="Ex: 2023" />
 
-            <div class="flex flex-col w-full gap-2">
-              <div class="flex w-full gap-2">
-                <Button @click="handleSubmit">Validate</Button>
-              </div>
-              <div class="flex w-full gap-2">
-                <ButtonSecondary @click="toggleForm">
-                  <AnimatePresence mode="popLayout">
-                    <motion.div v-if="loginForm" v-bind="motionFade" class="flex items-center justify-center">Register
-                    </motion.div>
-                    <motion.div v-else v-bind="motionFade" class="flex items-center justify-center">Login</motion.div>
-                  </AnimatePresence>
-                </ButtonSecondary>
-              </div>
+          </div>
+          
+          <div class="flex flex-col w-full gap-4 mt-8">
+            <div class="flex w-full gap-2">
+              <UButton :loading="loading" @click="handleSubmit" class="w-full h-12 flex justify-center text-lg">Validate</UButton>
             </div>
-
+            <div class="flex w-full gap-2 h-12">
+              <UButton @click="toggleForm" class="w-full" color="ghost" :class="'flex justify-center text-base'">
+                <AnimatePresence mode="popLayout">
+                  <motion.div v-if="loginForm" v-bind="motionFade" class="flex items-center justify-center">Register
+                  </motion.div>
+                  <motion.div v-else v-bind="motionFade" class="flex items-center justify-center">Login</motion.div>
+                </AnimatePresence>
+              </UButton>
+            </div>
           </div>
 
+          <div class="flex"></div>
         </div>
-
-      </LoadingWrapper>
+        
+      </div>
 
     </ion-content>
   </ion-page>
