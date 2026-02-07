@@ -12,7 +12,8 @@ export default defineConfig({
     vue(),
     ui(),
     legacy({
-      targets: ['defaults', 'not IE 11'], // ou 'esnext' si tu veux BigInt
+      // We explicitly target browsers that support BigInt
+      targets: ['edge >= 79', 'firefox >= 68', 'chrome >= 67', 'safari >= 14'],
       additionalLegacyPolyfills: ['regenerator-runtime/runtime']
     })
   ],
@@ -30,14 +31,21 @@ export default defineConfig({
     port: 5173,
   },
   build: {
-    target: 'esnext', // permet BigInt
-    chunkSizeWarningLimit: 2000, // optionnel, réduit les warnings de gros chunks
+    target: 'esnext',
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
-    output: {
-      manualChunks(id) {
-        if (id.includes('node_modules')) return 'vendor';
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            // Creates separate chunks for large libraries
+            if (id.includes('@ionic')) return 'ionic';
+            if (id.includes('vue')) return 'vue-stuff';
+            if (id.includes('lottie')) return 'lottie';
+            // Everything else goes to vendor
+            return 'vendor';
+          }
+        }
       }
     }
-  }
   }
 })
