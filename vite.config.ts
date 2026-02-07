@@ -11,7 +11,10 @@ export default defineConfig({
   plugins: [
     vue(),
     ui(),
-    legacy()
+    legacy({
+      targets: ['defaults', 'not IE 11'], // ou 'esnext' si tu veux BigInt
+      additionalLegacyPolyfills: ['regenerator-runtime/runtime']
+    })
   ],
   resolve: {
     alias: {
@@ -27,6 +30,7 @@ export default defineConfig({
     port: 5173,
   },
   build: {
-    target: 'esnext' // permet BigInt et d'autres features modernes
+    target: 'esnext', // permet BigInt
+    chunkSizeWarningLimit: 2000, // optionnel, réduit les warnings de gros chunks
   }
 })
