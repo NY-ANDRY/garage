@@ -11,7 +11,6 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AddCarSelect: typeof import('./src/components/add/SelectCar.vue')['default']
     AddIcon: typeof import('./src/components/icons/AddIcon.vue')['default']
     AlertIcon: typeof import('./src/components/icons/AlertIcon.vue')['default']
     Button: typeof import('./src/components/buttons/Button.vue')['default']
@@ -20,9 +19,9 @@ declare module 'vue' {
     CarBox: typeof import('./src/components/car/CarBox.vue')['default']
     CarCreate: typeof import('./src/components/car/CarCreate.vue')['default']
     CarIcon: typeof import('./src/components/icons/CarIcon.vue')['default']
-    CarSelect: typeof import('./src/components/add/CarSelect.vue')['default']
-    copy: typeof import('./src/components/icons/HomeIcon copy.vue')['default']
+    CartIcon: typeof import('./src/components/icons/CartIcon.vue')['default']
     CurUserIcon: typeof import('./src/components/icons/CurUserIcon.vue')['default']
+    DrillIcon: typeof import('./src/components/icons/DrillIcon.vue')['default']
     EmptyRecuperation: typeof import('./src/components/empty/EmptyRecuperation.vue')['default']
     ExploreContainer: typeof import('./src/components/ExploreContainer.vue')['default']
     HomeIcon: typeof import('./src/components/icons/HomeIcon.vue')['default']
@@ -45,21 +44,11 @@ declare module 'vue' {
     Test: typeof import('./src/components/Test.vue')['default']
     TextInput: typeof import('./src/components/input/TextInput.vue')['default']
     UApp: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/App.vue')['default']
-    UAuthForm: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/AuthForm.vue')['default']
     UBadge: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Badge.vue')['default']
     UButton: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Button.vue')['default']
-    UColorPicker: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/ColorPicker.vue')['default']
-    UEmpty: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Empty.vue')['default']
-    UInput: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Input.vue')['default']
     UModal: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Modal.vue')['default']
-    UPageCard: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/PageCard.vue')['default']
-    UPinInput: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/PinInput.vue')['default']
-    USelect: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Select.vue')['default']
-    USelectMenu: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/SelectMenu.vue')['default']
     UserBtn: typeof import('./src/components/buttons/UserBtn.vue')['default']
     UserIcon: typeof import('./src/components/icons/UserIcon.vue')['default']
-    UTable: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Table.vue')['default']
-    UTextarea: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Textarea.vue')['default']
     WaitListIcon: typeof import('./src/components/icons/WaitListIcon.vue')['default']
   }
 }

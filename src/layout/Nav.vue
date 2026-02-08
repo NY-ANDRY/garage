@@ -2,7 +2,7 @@
 import { IonTabBar, IonTabButton, IonTabs, IonPage, IonRouterOutlet } from '@ionic/vue';
 import HomeIcon from '@/components/icons/HomeIcon.vue';
 import AddBtn from '@/components/icons/AddIcon.vue';
-import PayBtn from '@/components/icons/PayIcon.vue';
+import PayBtn from '@/components/icons/CartIcon.vue';
 import CurUserIcon from '@/components/icons/CurUserIcon.vue';
 import CarIcon from '@/components/icons/Car2Icon.vue';
 import { useAuthStore } from '@/stores/auth';

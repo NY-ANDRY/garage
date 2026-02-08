@@ -27,7 +27,7 @@ const pressEffect = { scale: 0.99 };
 <template>
     <motion.div :while-press="pressEffect" @click="emit('toggle', reparation)" class="w-full grid grid-cols-10">
 
-        <div class="col-span-3 border-r border-neutral-100 flex flex-col pb-8">
+        <div class="col-span-3 border-r border-neutral-200 flex flex-col pb-8">
             <div class="flex font-inter-l text-neutral-700">{{ formatDate(reparation.date) }}</div>
             <div class="flex font-inter-l text-neutral-500">{{ formatTime(reparation.date) }}</div>
         </div>
