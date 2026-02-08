@@ -8,17 +8,17 @@ const config: CapacitorConfig = {
     PushNotifications: {
       presentationOptions: ["badge", "sound", "alert"],
     },
-    SplashScreen: {
-      launchShowDuration: 1000,
-      launchAutoHide: true,
-      launchFadeOutDuration: 1000,
-      backgroundColor: "#C1F11D",
-      androidScaleType: "FIT_CENTER",
-      showSpinner: true,
-      spinnerColor: "#999999",
-      splashFullScreen: true,
-      splashImmersive: true,
-    }
+    // SplashScreen: {
+    //   launchShowDuration: 1000,
+    //   launchAutoHide: true,
+    //   launchFadeOutDuration: 1000,
+    //   backgroundColor: "#C1F11D",
+    //   androidScaleType: "FIT_CENTER",
+    //   showSpinner: true,
+    //   spinnerColor: "#999999",
+    //   splashFullScreen: true,
+    //   splashImmersive: true,
+    // }
   },
 };
 
