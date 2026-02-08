@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="notification_accent_color">#ff611a</color>
+    <color name="notification_accent_color">#c1f11d</color>
     
-    <color name="colorPrimary">#ff611a</color>
+    <color name="colorPrimary">#c1f11d</color>
 </resources>
