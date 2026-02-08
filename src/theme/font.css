@@ -10,6 +10,10 @@
   --font-inter-i: "inter-i", sans-serif;
   --font-inter-t: "inter-t", sans-serif;
   --font-inter-bi: "inter-bi", sans-serif;
+  --font-interT: "interT", sans-serif;
+  --font-interT-m: "inter-m", sans-serif;
+  --font-interT-b: "interT-b", sans-serif;
+  --font-interT-sb: "interT-sb", sans-serif;
 }
 
 @font-face {

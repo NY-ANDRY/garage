@@ -5,13 +5,13 @@ import { useFirestoreCollection } from '@/composables/userFirestoreCollection';
 import InterventionBox from "@/components/interventions/InterventionBox.vue";
 import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
 import InterventionFacture from '@/components/interventions/InterventionFacture.vue';
-import catAnimation from '../assets/animations/Running_Cat.json';
 import Header from '@/layout/Header.vue';
 import { motion } from 'motion-v';
 import { Intervention, Voiture } from '@/types/types';
 import { motionFade } from '@/components/animations/motionBind';
 import { useReparationCreation } from '@/composables/useReparationCreation';
 import SelectCar from '@/components/add/SelectCar.vue';
+import carAnimation from '../assets/animations/Car.json';
 
 const { createReparation, loading: loadingCreate } = useReparationCreation()
 const { data, loading } = useFirestoreCollection<Intervention>("interventions");
@@ -55,15 +55,16 @@ const handleSubmit = async () => {
     <Header title="Tabb 3"> </Header>
     <ion-content :fullscreen="true">
 
-      <LoadingWrapper :loading="loading" :animationData="catAnimation" :width="400" :height="400">
+      <LoadingWrapper :loading="loading" :animationData="carAnimation" :width="400" :height="400">
 
-        <h6 class="font-inter-l capitalize text-sm text-neutral-400">voiture</h6>
-        <div class="flex py-0">
+        <h2 class="font-inter-b text-neutral-800">Signaler une reparation</h2>
+        <h6 class="font-inter-l capitalize text-sm text-neutral-400 mt-3!">voiture</h6>
+        <div class="flex pb-4 pt-1">
           <SelectCar @select="setCar" :car="car" />
         </div>
 
         <h6 class="font-inter-l capitalize text-sm text-neutral-400">interventions</h6>
-        <motion.div key="data" v-bind="motionFade" class="grid grid-cols-2 gap-2">
+        <motion.div key="data" v-bind="motionFade" class="grid grid-cols-2 gap-3">
           <InterventionBox v-for="item in data" :key="item.id" :item="item" :isSelected="isSelected(item.id)"
             @toggle="toggleIntervention" />
         </motion.div>
@@ -72,8 +73,8 @@ const handleSubmit = async () => {
 
         <InterventionFacture :items="selectedIntervention" />
 
-        <div class="flex overflow-hidden rounded mt-2">
-          <UButton :loading="loadingCreate" loading-icon="i-lucide-loader" block @click="handleSubmit"
+        <div class="flex overflow-hidden rounded mt-2 pb-4">
+          <UButton :loading="loadingCreate" block @click="handleSubmit"
             class="h-12 py-4!">
             Créer
           </UButton>

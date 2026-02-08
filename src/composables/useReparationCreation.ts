@@ -5,7 +5,7 @@ import type { Intervention, Reparation, Voiture } from '@/types/types'
 import { useToast } from '@nuxt/ui/runtime/composables/useToast'
 
 export function useReparationCreation() {
-  const { user } = useAuthStore()
+  const authStore = useAuthStore()
   const toast = useToast()
   const { mutate, loading, error } = useFirestoreMutation('reparations')
 
@@ -32,13 +32,14 @@ export function useReparationCreation() {
       return
     }
 
-    if (!user) return
+    const user = await authStore.waitForUser()
 
     const newReparation: Reparation = {
       voiture: car,
       user: {
         uid: user.uid,
         displayName: user.displayName,
+        email: user.email,
         photoURL: user.photoURL
       },
       interventions,

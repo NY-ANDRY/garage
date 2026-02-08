@@ -1,13 +1,12 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { auth } from '@/config/firebaseConfig'
 import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
-  User as FirebaseUser,
-  UserCredential
+  User as FirebaseUser
 } from 'firebase/auth'
 import { Preferences } from '@capacitor/preferences'
 import { User } from '@/types/types'
@@ -17,18 +16,15 @@ const { mutate } = useFirestoreMutation("users")
 const AUTH_KEY = 'is_logged_in'
 const USER_KEY = 'current_user'
 
-// Sauvegarde l'état de connexion
 const setLoginState = async (value: boolean) => {
   await Preferences.set({ key: AUTH_KEY, value: value ? '1' : '0' })
 }
 
-// Récupère l'état de connexion
 export const getLoginState = async (): Promise<boolean> => {
   const { value } = await Preferences.get({ key: AUTH_KEY })
   return value === '1'
 }
 
-// Convertit un FirebaseUser en notre User et le sauvegarde
 const mapFirebaseUser = async (uc: FirebaseUser) => {
   const { value: fcmToken } = await Preferences.get({ key: 'fcm_token' })
 
@@ -50,7 +46,6 @@ const mapFirebaseUser = async (uc: FirebaseUser) => {
   return u
 }
 
-// Récupère l'utilisateur stocké localement
 export const getStoredUser = async (): Promise<User | null> => {
   const { value } = await Preferences.get({ key: USER_KEY })
   return value ? JSON.parse(value) : null
@@ -60,7 +55,6 @@ export const useAuthStore = defineStore('auth', () => {
   const user = ref<User | null>(null)
   const initialized = ref(false)
 
-  // Initialisation au lancement
   const init = async () => {
     const storedUser = await getStoredUser()
     if (storedUser) user.value = storedUser
@@ -98,12 +92,29 @@ export const useAuthStore = defineStore('auth', () => {
     await setLoginState(false)
   }
 
+  const waitForUser = async (): Promise<User> => {
+    if (user.value) return user.value
+
+    return new Promise((resolve) => {
+      const stop = watch(
+        () => user.value,
+        (val) => {
+          if (val) {
+            stop()
+            resolve(val)
+          }
+        }
+      )
+    })
+  }
+
   return {
     user,
     initialized,
     init,
     login,
     register,
-    logout
+    logout,
+    waitForUser
   }
 })

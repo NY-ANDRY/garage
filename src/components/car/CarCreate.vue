@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { IonModal, IonContent, IonSelect, IonSelectOption } from '@ionic/vue'
+import { IonModal, IonContent, IonSelect, IonSelectOption, IonInput, IonTextarea } from '@ionic/vue'
 import { useVoitureCreation } from '@/composables/useVoitureCreation'
 import { useFirestoreCollection } from '@/composables/userFirestoreCollection'
 
@@ -64,48 +64,47 @@ const handleSubmit = () => {
         <h2 class="text-xl font-semibold mb-4">Créer une voiture</h2>
 
         <div class="flex gap-2 mb-0">
-          <UFormGroup label="Numero" class="w-full mb-2 flex flex-col gap-1">
+          <div label="Numero" class="w-full mb-2 flex flex-col gap-1">
             <div class="capitalize text-neutral-400 text font-inter-m">numero</div>
-            <UInput v-model="numero" placeholder="Ex: 123-ABC" class="w-full" />
-          </UFormGroup>
+            <ion-input v-model="numero" class="w-full  border border-neutral-300 rounded px-2 py-2"></ion-input>
+          </div>
 
-          <UFormGroup label="Nom" class="w-full mb-2 flex flex-col gap-1">
+          <div label="Nom" class="w-full mb-2 flex flex-col gap-1">
             <div class="capitalize text-neutral-400 text font-inter-m">nom</div>
-            <UInput v-model="nom" placeholder="Ex: Tesla Model 3" class="w-full" />
-          </UFormGroup>
+            <ion-input v-model="nom" class="w-full  border border-neutral-300 rounded px-2 py-2"></ion-input>
+          </div>
         </div>
 
-        <UFormGroup label="Description" class="w-full mb-2 flex flex-col gap-1">
+        <div label="Description" class="w-full mb-2 flex flex-col gap-1">
           <div class="capitalize text-neutral-400 text font-inter-m">description</div>
-          <UTextarea v-model="description" placeholder="..." class="w-full" />
-        </UFormGroup>
+          <ion-textarea v-model="description" placeholder="..." class="w-full  border border-neutral-300 rounded p-2"></ion-textarea>
+        </div>
 
         <div class="flex gap-2">
-          <UFormGroup label="Marque" class="w-full mb-2 flex flex-col gap-1">
+          <div label="Marque" class="w-full mb-2 flex flex-col gap-1">
             <div class="capitalize text-neutral-400 text font-inter-m">marque</div>
             <ion-select v-model="marque" interface="popover" placeholder="marque"
-              class="w-full border border-neutral-300 rounded-lg px-2">
+              class="w-full border border-neutral-300 rounded px-2">
               <ion-select-option v-for="m in marques" :key="m" :value="m">{{ m }}</ion-select-option>
             </ion-select>
-          </UFormGroup>
+          </div>
 
-          <UFormGroup label="Année" class="w-full mb-2 flex flex-col gap-1">
+          <div label="Année" class="w-full mb-2 flex flex-col gap-1">
             <div class="capitalize text-neutral-400 text font-inter-m">année</div>
             <ion-select v-model="annee" interface="popover" placeholder="année"
-              class="w-full border border-neutral-300 rounded-lg px-2">
+              class="w-full border border-neutral-300 rounded px-2">
               <ion-select-option v-for="a in annees" :key="a" :value="a">{{ a }}</ion-select-option>
             </ion-select>
-          </UFormGroup>
+          </div>
         </div>
 
-
-        <UFormGroup label="Couleur" class="w-full mb-2 flex flex-col gap-1">
+        <div label="Couleur" class="w-full mb-2 flex flex-col gap-1">
           <div class="capitalize text-neutral-400 text font-inter-m">couleur</div>
           <div class="flex overflow-hidden rounded-2xl">
             <input type="color" v-model="couleurHex"
               class="w-full h-12 border-0! outline-0! overflow-hidden rounded-xl!" />
           </div>
-        </UFormGroup>
+        </div>
 
         <div class="flex overflow-hidden rounded mt-2">
           <UButton :loading="loading" loading-icon="i-lucide-loader" block @click="handleSubmit" class="h-12 py-4!">
@@ -116,6 +115,7 @@ const handleSubmit = () => {
     </ion-content>
   </ion-modal>
 </template>
+
 
 <style>
 ion-select::part(icon) {

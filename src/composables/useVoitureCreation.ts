@@ -4,10 +4,10 @@ import type { Voiture } from '@/types/types'
 import { useToast } from '@nuxt/ui/runtime/composables/useToast'
 
 export function useVoitureCreation() {
-  const { user } = useAuthStore()
+  const authStore = useAuthStore()
   const toast = useToast()
-
   const { mutate, loading, error } = useFirestoreMutation('voitures')
+
 
   const createVoiture = async (
     data: {
@@ -21,7 +21,7 @@ export function useVoitureCreation() {
     },
     onSuccess?: () => void
   ) => {
-    if (!user) return
+    const user = await authStore.waitForUser()
 
     if (!data.numero || !data.nom || !data.marque || !data.annee) {
       toast.add({

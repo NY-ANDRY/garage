@@ -1,8 +1,12 @@
 import { ref as vueRef, onMounted, onUnmounted, watch, Ref } from "vue";
-import { collection, onSnapshot, Unsubscribe, DocumentData } from "firebase/firestore";
+import { collection, onSnapshot, Unsubscribe, DocumentData, query, orderBy as fbOrderBy, QueryConstraint, } from "firebase/firestore";
 import { firestore } from "../config/firebaseConfig";
 
-export function useFirestoreCollection<T extends DocumentData>(collectionName: string) {
+export function useFirestoreCollection<T extends DocumentData>(
+  collectionName: string,
+  orderByField?: string,
+  orderByDirection: "asc" | "desc" = "desc"
+) {
   const data: Ref<(T & { id: string })[]> = vueRef([]);
   const loading = vueRef<boolean>(true);
 
@@ -12,10 +16,18 @@ export function useFirestoreCollection<T extends DocumentData>(collectionName: s
     if (!name) return;
 
     loading.value = true;
+
+    const constraints: QueryConstraint[] = [];
+
+    if (orderByField) {
+      constraints.push(fbOrderBy(orderByField, orderByDirection));
+    }
+
     const colRef = collection(firestore, name);
+    const q = constraints.length ? query(colRef, ...constraints) : colRef;
 
     unsubscribe = onSnapshot(
-      colRef,
+      q,
       (snapshot) => {
         data.value = snapshot.docs.map((doc) => ({
           id: doc.id,

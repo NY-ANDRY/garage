@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { motion, AnimatePresence } from "motion-v";
-import ph from "../../assets/svg/ph-1.svg";
 import { ref } from "vue";
 import { Notification } from "@/types/types";
 import { useFirestoreMutation } from "@/composables/useFirestoreMutation";

@@ -3,14 +3,13 @@ import { IonPage, IonContent } from '@ionic/vue';
 import Header from '@/layout/Header.vue';
 import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
 import catAnimation from '../assets/animations/Car.json';
-import { useFirestoreCollection } from '@/composables/userFirestoreCollection';
-import { Voiture } from '@/types/types';
 import { motion } from 'motion-v';
 import CarBox from '@/components/car/CarBox.vue';
 import Create from '../components/car/CarCreate.vue';
 import { motionFade } from '@/components/animations/motionBind';
+import { useFirestoreVoitures } from '@/composables/useFirestoreVoitures';
 
-const { data, loading } = useFirestoreCollection<Voiture>("voitures");
+const { data, loading } = useFirestoreVoitures();
 
 </script>
 
@@ -19,8 +18,10 @@ const { data, loading } = useFirestoreCollection<Voiture>("voitures");
     <Header title="Tab Car"> </Header>
 
     <ion-content fullscreen>
-      <h6 class="font-inter-l capitalize text-sm text-neutral-400">voitures</h6>
-      <Create />
+      <h2 class="font-inter-b text-neutral-800 mb-6!">Voitures</h2>
+      <div class="flex pb-4">
+        <Create />
+      </div>
       <div class="flex">
         <LoadingWrapper :loading="loading" :animationData="catAnimation" :width="400" :height="400">
           <motion.div key="data" v-bind="motionFade" class="grid grid-cols-1 gap-4">

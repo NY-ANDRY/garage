@@ -1,25 +1,21 @@
 <script setup lang="ts">
 import { IonModal, IonContent } from '@ionic/vue';
 import { Voiture } from "@/types/types";
-import { useFirestoreCollection } from "@/composables/userFirestoreCollection";
 import { ref } from "vue";
 import CarBox from '@/components/car/CarBox.vue';
+import { useFirestoreVoitures } from '@/composables/useFirestoreVoitures';
 
 const props = defineProps<{ car: Voiture | null }>();
 const emit = defineEmits<{
   (e: "select", voiture: Voiture): void
 }>()
 
-// const c = ref<Voiture | null>(null);
-
-const { data } = useFirestoreCollection<Voiture>("voitures");
+const { data } = useFirestoreVoitures();
 
 const open = ref(false);
 const closeModal = () => {
   open.value = false;
 };
-
-const pressEffect = { scale: 0.97 };
 
 const handleSelect = (v: Voiture) => {
   emit('select', v);

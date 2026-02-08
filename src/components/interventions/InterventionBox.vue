@@ -17,7 +17,7 @@ const pressEffect = { scale: 0.97 };
 </script>
 
 <template>
-  <motion.div :while-press="pressEffect" @click="emit('toggle', item)" class="bg-white rounded-xl gap-2 relative flex h-16 items-center justify-between p-1 pl-2 pr-4 overflow-hidden
+  <motion.div :while-press="pressEffect" @click="emit('toggle', item)" class="bg-white rounded-lg gap-2 relative flex h-16 items-center justify-between p-1 pl-2 pr-4 shadow overflow-hidden
            transition-all">
     <AnimatePresence mode="wait">
       <motion.div v-if="isSelected" v-bind="motionFade" class="absolute top-0 right-0 w-2.5 h-full bg-emerald-400" />

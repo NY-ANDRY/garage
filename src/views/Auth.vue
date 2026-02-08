@@ -5,7 +5,6 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { motion, AnimatePresence } from 'motion-v';
 import { motionFade, motionSwap } from '@/components/animations/motionBind';
-import ButtonSecondary from '@/components/buttons/ButtonSecondary.vue';
 import TextInput from '@/components/input/TextInput.vue';
 import { useToast } from '@nuxt/ui/runtime/composables/useToast';
 
