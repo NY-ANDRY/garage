@@ -2,6 +2,9 @@ body {
   font-family: 'inter';
   color: var(--style-color-default);
 }
+button {
+  color: white;
+}
 /* ion-content {
   background-color: #000;
 } */

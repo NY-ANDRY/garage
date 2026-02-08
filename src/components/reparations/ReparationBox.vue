@@ -28,11 +28,11 @@ const pressEffect = { scale: 0.99 };
     <motion.div :while-press="pressEffect" @click="emit('toggle', reparation)" class="w-full grid grid-cols-10">
 
         <div class="col-span-3 border-r border-neutral-100 flex flex-col pb-8">
-            <div class="flex font-inter-l text-neutral-500">{{ formatDate(reparation.date) }}</div>
-            <div class="flex font-inter-l text-neutral-300">{{ formatTime(reparation.date) }}</div>
+            <div class="flex font-inter-l text-neutral-700">{{ formatDate(reparation.date) }}</div>
+            <div class="flex font-inter-l text-neutral-500">{{ formatTime(reparation.date) }}</div>
         </div>
 
-        <div class="col-span-7 pl-4 text-neutral-700 pb-6">
+        <div class="col-span-7 pl-4 text-neutral-900 pb-6">
             <div class="flex justify-between bg-neutral-100 rounded-2xl p-4.5">
 
                 <div class="flex flex-col">
@@ -51,7 +51,7 @@ const pressEffect = { scale: 0.99 };
 
                     </div>
 
-                    <div class="flex font-inter-l text-neutral-500 text-sm pt-1 pb-0">
+                    <div class="flex font-inter-l text-neutral-700 text-sm pt-1 pb-0">
                         <UBadge size="sm" v-bind="getStatutBadge(reparation.statut)" />
                     </div>
                 </div>

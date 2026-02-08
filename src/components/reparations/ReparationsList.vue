@@ -14,7 +14,7 @@ const { data, loading } = useFirestoreReparation('date');
 
         <div class="flex flex-col p-4">
 
-            <div class="grid grid-cols-6 text-neutral-300 capitalize font-inter-m mb-6">
+            <div class="grid grid-cols-6 text-neutral-400 capitalize font-inter-m mb-6">
                 <div class="col-span-2">Time</div>
                 <div class="col-span-4 pl-4">Reparations</div>
             </div>

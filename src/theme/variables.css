@@ -2,10 +2,9 @@
 http://ionicframework.com/docs/theming/ */
 
 :root {
-
   /* --main-bg: #FAF9F9; */
   --main-bg: #fff;
-
+  --ui-primary: #121314;
   --nav-svg-fill-active: #323232;
   --nav-svg-fill-inactive: var(--main-bg);
   --nav-svg-stroke-active: #323232;
@@ -13,9 +12,8 @@ http://ionicframework.com/docs/theming/ */
   --style-color-default: #242424;
   --style-color-title: #262626;
 
-
   --ion-safe-area-bottom: env(safe-area-inset-bottom);
-  --ion-default-font: 'inter' !important;
+  --ion-default-font: "inter" !important;
   --ion-text-color: var(--style-color-default);
   --ripple-color: transparent;
 }

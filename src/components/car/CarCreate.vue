@@ -57,7 +57,7 @@ const handleSubmit = () => {
     Créer une nouvelle voiture
   </div>
 
-  <ion-modal :is-open="open" initial-breakpoint="0.96" :breakpoints="[0, 0.80, 0.96]" @didDismiss="closeModal"
+  <ion-modal :is-open="open" initial-breakpoint="0.96" :breakpoints="[0, 0.96, 0.96]" @didDismiss="closeModal"
     class="custom-modalll">
     <ion-content class="p-0 overflow-hidden">
       <div class="bg-white rounded-t-3xl p-6 space-y-4 flex flex-col gap-1">
