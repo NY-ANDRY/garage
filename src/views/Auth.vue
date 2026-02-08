@@ -77,11 +77,11 @@ const handleSubmit = async () => {
               <UButton :loading="loading" loading-icon="i-lucide-loader" block @click="handleSubmit" class="w-full h-12 flex justify-center text-lg">Validate</UButton>
             </div>
             <div class="flex w-full gap-2 h-12">
-              <UButton @click="toggleForm" class="w-full" color="ghost" :class="'flex justify-center text-base'">
+              <UButton @click="toggleForm" color="ghost" class="bg-neutral-10 w-full flex justify-center text-base">
                 <AnimatePresence mode="popLayout">
-                  <motion.div v-if="loginForm" v-bind="motionFade" class="flex items-center justify-center">Register
+                  <motion.div v-if="loginForm" v-bind="motionFade" class="flex items-center justify-center text-black">Register
                   </motion.div>
-                  <motion.div v-else v-bind="motionFade" class="flex items-center justify-center">Login</motion.div>
+                  <motion.div v-else v-bind="motionFade" class="flex items-center justify-center text-black">Login</motion.div>
                 </AnimatePresence>
               </UButton>
             </div>

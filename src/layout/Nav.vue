@@ -4,7 +4,7 @@ import HomeIcon from '@/components/icons/HomeIcon.vue';
 import AddBtn from '@/components/icons/AddIcon.vue';
 import PayBtn from '@/components/icons/PayIcon.vue';
 import CurUserIcon from '@/components/icons/CurUserIcon.vue';
-import ListIcon from '@/components/icons/ListIcon.vue';
+import CarIcon from '@/components/icons/Car2Icon.vue';
 import { useAuthStore } from '@/stores/auth';
 
 const { user } = useAuthStore();
@@ -21,7 +21,7 @@ const { user } = useAuthStore();
         </ion-tab-button>
 
         <ion-tab-button tab="car" href="/tabs/car">
-          <ListIcon />
+          <CarIcon />
         </ion-tab-button>
 
         <ion-tab-button tab="add" href="/tabs/add">

@@ -22,7 +22,7 @@ defineProps<{
       <slot name="loadingIcon" v-else> </slot>
     </motion.div>
 
-    <motion.div v-else v-bind="motionFade" class="flex flex-col w-full min-h-full">
+    <motion.div v-else v-bind="motionFade" class="flex-1 flex flex-col w-full min-h-full lw">
       <slot> </slot>
     </motion.div>
 
