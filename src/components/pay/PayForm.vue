@@ -62,10 +62,10 @@ const handleRecuperer = () => {
                 <ReparationBox :reparation="dataReparation" />
             </div>
 
-            <UButton :loading="loadingMutateReparations || loadingMutateRecuperation"
+            <UButton :loading="loadingMutateReparations || loadingMutateRecuperation"  loading-icon="i-lucide-loader" block
                 v-if="dataReparation && dataReparation.statut == 3" v-on:click="handleRecuperer"
                 class="flex justify-center h-12">Recuperer</UButton>
-            <UButton :loading="loadingMutateReparations || loadingMutateRecuperation" v-else v-on:click="handlePay"
+            <UButton :loading="loadingMutateReparations || loadingMutateRecuperation" v-else v-on:click="handlePay"  loading-icon="i-lucide-loader" block
                 class="flex justify-center h-12">Payer
             </UButton>
         </div>

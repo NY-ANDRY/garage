@@ -74,7 +74,7 @@ const handleSubmit = async () => {
           
           <div class="flex flex-col w-full gap-4 mt-8">
             <div class="flex w-full gap-2">
-              <UButton :loading="loading" @click="handleSubmit" class="w-full h-12 flex justify-center text-lg">Validate</UButton>
+              <UButton :loading="loading" loading-icon="i-lucide-loader" block @click="handleSubmit" class="w-full h-12 flex justify-center text-lg">Validate</UButton>
             </div>
             <div class="flex w-full gap-2 h-12">
               <UButton @click="toggleForm" class="w-full" color="ghost" :class="'flex justify-center text-base'">

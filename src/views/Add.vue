@@ -74,7 +74,7 @@ const handleSubmit = async () => {
         <InterventionFacture :items="selectedIntervention" />
 
         <div class="flex overflow-hidden rounded mt-2 pb-4">
-          <UButton :loading="loadingCreate" block @click="handleSubmit"
+          <UButton :loading="loadingCreate" loading-icon="i-lucide-loader" block  @click="handleSubmit"
             class="h-12 py-4!">
             Créer
           </UButton>
