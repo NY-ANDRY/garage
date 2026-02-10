@@ -14,8 +14,8 @@ const { login, register } = useAuthStore();
 const router = useRouter();
 
 const loading = ref<boolean>(false);
-const email = ref<string>('abc@gmail.com');
-const password = ref<string>('abcabcabcabc');
+const email = ref<string>('');
+const password = ref<string>('');
 
 const toggleForm = () => {
   loginForm.value = !loginForm.value;
@@ -69,7 +69,7 @@ const handleSubmit = async () => {
             </AnimatePresence>
 
             <TextInput label="Email" v-model="email" type="text" placeholder="email@gmail.com" />
-            <TextInput label="Password" v-model="password" type="password" placeholder="Ex: 2023" />
+            <TextInput label="Password" v-model="password" type="password" placeholder="your secret pasword" />
 
           </div>
 

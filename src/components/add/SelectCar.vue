@@ -4,13 +4,14 @@ import { Voiture } from "@/types/types";
 import { ref } from "vue";
 import CarBox from '@/components/car/CarBox.vue';
 import { useFirestoreVoitures } from '@/composables/useFirestoreVoitures';
+import EmptyCar from '../empty/EmptyCar.vue';
 
 const props = defineProps<{ car: Voiture | null }>();
 const emit = defineEmits<{
   (e: "select", voiture: Voiture): void
 }>()
 
-const { data } = useFirestoreVoitures();
+const { data: voitures } = useFirestoreVoitures();
 
 const open = ref(false);
 const closeModal = () => {
@@ -42,10 +43,13 @@ const handleSelect = (v: Voiture) => {
     <ion-content class="p-0 overflow-hidden">
       <div class="bg-white rounded-t-3xl pt-8 px-2 space-y-4">
 
-        <div class="grid grid-cols-1 gap-3" v-for="voiture in data">
+        <div v-if="voitures && voitures.length > 0" class="grid grid-cols-1 gap-3" v-for="voiture in voitures">
           <div @click="() => { handleSelect(voiture) }">
             <CarBox :item="voiture" />
           </div>
+        </div>
+        <div v-else class="flex flex-col justify-center py-8">
+          <EmptyCar />
         </div>
 
       </div>

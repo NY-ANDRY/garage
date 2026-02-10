@@ -12,7 +12,6 @@ import ReparationsList from '@/components/reparations/ReparationsList.vue';
     <ion-content :fullscreen="true">
 
       <div class="flex">
-        
       </div>
       <ReparationsList />
 

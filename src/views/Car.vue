@@ -8,6 +8,7 @@ import CarBox from '@/components/car/CarBox.vue';
 import Create from '../components/car/CarCreate.vue';
 import { motionFade } from '@/components/animations/motionBind';
 import { useFirestoreVoitures } from '@/composables/useFirestoreVoitures';
+import EmptyCar from '@/components/empty/EmptyCar.vue';
 
 const { data, loading } = useFirestoreVoitures();
 
@@ -25,7 +26,10 @@ const { data, loading } = useFirestoreVoitures();
       <div class="flex">
         <LoadingWrapper :loading="loading" :animationData="catAnimation" :width="400" :height="400">
           <motion.div key="data" v-bind="motionFade" class="grid grid-cols-1 gap-4">
-            <CarBox v-for="item in data" :key="item.id" :item="item" />
+            <CarBox v-if="data && data.length" v-for="item in data" :key="item.id" :item="item" />
+            <div v-else class="flex">
+              <EmptyCar />
+            </div>
           </motion.div>
         </LoadingWrapper>
       </div>

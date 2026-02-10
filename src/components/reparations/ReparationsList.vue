@@ -3,6 +3,7 @@ import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
 import catAnimation from '@/assets/animations/Car.json';
 import ReparationBox from '@/components/reparations/ReparationBox.vue';
 import { useFirestoreReparation } from '@/composables/useFirestoreReparation';
+import EmptyReparation from '../empty/EmptyReparation.vue';
 
 const { data, loading } = useFirestoreReparation('date');
 
@@ -18,7 +19,10 @@ const { data, loading } = useFirestoreReparation('date');
                 <div class="col-span-2">Date</div>
                 <div class="col-span-4 pl-4">Reparations</div>
             </div>
-            <ReparationBox v-for="rep in data" :key="rep.id" :reparation="rep" />
+            <ReparationBox v-if="data && data.length > 0" v-for="rep in data" :key="rep.id" :reparation="rep" />
+            <div v-else class="flex py-8">
+                <EmptyReparation />
+            </div>
 
         </div>
 
