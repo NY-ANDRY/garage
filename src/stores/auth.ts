@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
+  updateProfile,
   User as FirebaseUser
 } from 'firebase/auth'
 import { Preferences } from '@capacitor/preferences'
@@ -108,6 +109,23 @@ export const useAuthStore = defineStore('auth', () => {
     })
   }
 
+  const updateDisplayName = async (newName: string) => {
+    if (!auth.currentUser || !user.value) return
+    
+    await updateProfile(auth.currentUser, {
+      displayName: newName
+    })
+
+    const updatedUser = {
+      ...user.value,
+      displayName: newName
+    }
+
+    user.value = updatedUser
+    await mutate(updatedUser, { type: 'set', id: auth.currentUser.uid })
+    await Preferences.set({ key: USER_KEY, value: JSON.stringify(updatedUser) })
+  }
+
   return {
     user,
     initialized,
@@ -115,6 +133,7 @@ export const useAuthStore = defineStore('auth', () => {
     login,
     register,
     logout,
-    waitForUser
+    waitForUser,
+    updateDisplayName
   }
 })

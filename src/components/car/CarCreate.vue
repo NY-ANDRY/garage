@@ -59,7 +59,7 @@ const handleSubmit = () => {
 
   <ion-modal :is-open="open" initial-breakpoint="0.96" :breakpoints="[0, 0.96, 0.96]" @didDismiss="closeModal"
     class="custom-modalll">
-    <ion-content class="p-0 overflow-hidden">
+    <ion-content class="p-0 overflow-hidden ion-padding">
       <div class="bg-white rounded-t-3xl p-6 space-y-4 flex flex-col gap-1">
         <h2 class="text-xl font-semibold mb-4">Créer une voiture</h2>
 
@@ -77,7 +77,8 @@ const handleSubmit = () => {
 
         <div label="Description" class="w-full mb-2 flex flex-col gap-1">
           <div class="capitalize text-neutral-400 text font-inter-m">description</div>
-          <ion-textarea v-model="description" placeholder="..." class="w-full  border border-neutral-300 rounded p-2"></ion-textarea>
+          <ion-textarea v-model="description" placeholder="..."
+            class="w-full  border border-neutral-300 rounded p-2"></ion-textarea>
         </div>
 
         <div class="flex gap-2">

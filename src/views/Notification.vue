@@ -9,8 +9,9 @@ import LoadingWrapper from '@/components/animations/LoadingWrapper.vue';
 import { Notification } from '@/types/types';
 import { Preferences } from '@capacitor/preferences';
 import { motionFade } from '@/components/animations/motionBind';
+import { useFirestoreNotifications } from '@/composables/useFirestoreNotifications';
 
-const { data, loading } = useFirestoreCollection<Notification>("notifications");
+const { data, loading } = useFirestoreNotifications();
 
 const getBackButtonText = () => {
   const win = window as any;

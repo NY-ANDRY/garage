@@ -11,6 +11,10 @@ button .secondary {
 /* ion-content {
   background-color: #000;
 } */
+
+ion-modal {
+    --border-radius: 32px;
+}
 ion-content::part(scroll) {
   background-color: var(--main-bg);
 }
@@ -19,6 +23,7 @@ ion-content {
 }
 ion-header {
   background-color: var(--main-bg);
+  background-color: #ccc;
 }
 ion-toolbar {
   --background: var(--main-bg);
