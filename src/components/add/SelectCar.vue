@@ -40,7 +40,7 @@ const handleSelect = (v: Voiture) => {
   <ion-modal :is-open="open" initial-breakpoint="0.98" :breakpoints="[0, 0.98, 0.98]" @didDismiss="closeModal"
     class="custom-modal">
     <ion-content class="p-0 overflow-hidden">
-      <div class="bg-white rounded-t-3xl py-6 space-y-4">
+      <div class="bg-white rounded-t-3xl pt-8 px-2 space-y-4">
 
         <div class="grid grid-cols-1 gap-3" v-for="voiture in data">
           <div @click="() => { handleSelect(voiture) }">

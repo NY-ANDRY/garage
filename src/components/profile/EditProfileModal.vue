@@ -48,7 +48,7 @@ const updateDisplayName = async () => {
 <template>
     <ion-modal :is-open="isOpen" @didDismiss="closeModal" :initial-breakpoint="0.8" :breakpoints="[0, 0.8, 0.8]">
         <ion-content class="ion-padding">
-            <div class="flex flex-col h-full bg-white">
+            <div class="flex flex-col h-full bg-white px-2">
                 <!-- Header -->
                 <div class="flex justify-between items-center mb-8 pt-2">
                     <h3 class="text-2xl font-bold text-black">Edit Profile</h3>

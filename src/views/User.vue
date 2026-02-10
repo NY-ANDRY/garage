@@ -2,16 +2,24 @@
 import { IonPage, IonContent } from '@ionic/vue';
 import Header from '@/layout/Header.vue';
 import { useAuthStore } from '@/stores/auth';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import ProfileHeader from '@/components/profile/ProfileHeader.vue';
 import ProfileInfo from '@/components/profile/ProfileInfo.vue';
 import LogoutButton from '@/components/profile/LogoutButton.vue';
 import EditProfileModal from '@/components/profile/EditProfileModal.vue';
 import { logOutOutline } from 'ionicons/icons';
+import { User } from '@/types/types';
 
 const authStore = useAuthStore();
-const { user } = authStore;
+const { user: userLazy, waitForUser } = authStore;
+
+const user = ref<User | null>(null);
+
+onMounted(async () => {
+    user.value = await waitForUser();
+});
+
 const router = useRouter();
 
 const isEditModalOpen = ref(false);

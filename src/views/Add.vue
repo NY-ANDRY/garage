@@ -57,7 +57,7 @@ const handleSubmit = async () => {
 
       <LoadingWrapper :loading="loading" :animationData="carAnimation" :width="400" :height="400">
 
-        <h2 class="font-inter-b text-neutral-800">Signaler une reparation</h2>
+        <h2 class="font-inter-b text-neutral-800">Faire une reparation</h2>
         <h6 class="font-inter-l capitalize text-sm text-neutral-400 mt-3!">voiture</h6>
         <div class="flex pb-4 pt-1">
           <SelectCar @select="setCar" :car="car" />

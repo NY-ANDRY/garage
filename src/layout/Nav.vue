@@ -32,7 +32,6 @@ const { user } = useAuthStore();
           <PayBtn />
         </ion-tab-button>
 
-
         <ion-tab-button tab="user" href="/tabs/user">
           <CurUserIcon />
         </ion-tab-button>

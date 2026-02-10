@@ -38,11 +38,11 @@ const handleSubmit = async () => {
 
     router.replace('/tabs/home');
   } catch (error: any) {
-      toast.add({
-        title: 'Error',
-        description: error.message,
-        color: 'error'
-      })
+    toast.add({
+      title: 'Error',
+      description: error.message,
+      color: 'error'
+    })
   } finally {
     loading.value = false;
   }
@@ -54,34 +54,38 @@ const handleSubmit = async () => {
   <ion-page>
     <ion-content :fullscreen="true">
 
-        <div class="flex flex-col w-full min-h-full">
-          
-          <div class="flex flex-col flex-1 pb-12 items-center justify-center p-4 gap-8">
-            
-            <div class="w-full min-h-full flex flex-col gap-6 items-center">
-              <AnimatePresence mode="popLayout">
+      <form @submit.prevent="handleSubmit" class="flex flex-col w-full min-h-full">
+
+        <div class="flex flex-col flex-1 pb-12 items-center justify-center p-4 gap-8">
+
+          <div class="w-full min-h-full flex flex-col gap-6 items-center">
+
+            <AnimatePresence mode="popLayout">
               <motion.div v-if="loginForm" v-bind="motionSwap"
                 class="w-full text-2xl tracking-wider font-[inter-sb] capitalize">Sign In</motion.div>
-                <motion.div v-else v-bind="motionSwap" class="w-full text-2xl tracking-wider font-[inter-sb] capitalize">
-                  Register
-                </motion.div>
+              <motion.div v-else v-bind="motionSwap" class="w-full text-2xl tracking-wider font-[inter-sb] capitalize">
+                Register
+              </motion.div>
             </AnimatePresence>
 
             <TextInput label="Email" v-model="email" type="text" placeholder="email@gmail.com" />
             <TextInput label="Password" v-model="password" type="password" placeholder="Ex: 2023" />
 
           </div>
-          
+
           <div class="flex flex-col w-full gap-4 mt-8">
             <div class="flex w-full gap-2">
-              <UButton :loading="loading" loading-icon="i-lucide-loader" block @click="handleSubmit" class="w-full h-12 flex justify-center text-lg">Validate</UButton>
+              <UButton type="submit" :loading="loading" loading-icon="i-lucide-loader" block
+                class="w-full h-12 flex justify-center text-lg">Validate</UButton>
             </div>
             <div class="flex w-full gap-2 h-12">
               <UButton @click="toggleForm" color="ghost" class="bg-neutral-10 w-full flex justify-center text-base">
                 <AnimatePresence mode="popLayout">
-                  <motion.div v-if="loginForm" v-bind="motionFade" class="flex items-center justify-center text-black">Register
+                  <motion.div v-if="loginForm" v-bind="motionFade" class="flex items-center justify-center text-black">
+                    Register
                   </motion.div>
-                  <motion.div v-else v-bind="motionFade" class="flex items-center justify-center text-black">Login</motion.div>
+                  <motion.div v-else v-bind="motionFade" class="flex items-center justify-center text-black">Login
+                  </motion.div>
                 </AnimatePresence>
               </UButton>
             </div>
@@ -89,8 +93,8 @@ const handleSubmit = async () => {
 
           <div class="flex"></div>
         </div>
-        
-      </div>
+
+      </form>
 
     </ion-content>
   </ion-page>
