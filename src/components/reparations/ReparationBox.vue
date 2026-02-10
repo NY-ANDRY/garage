@@ -43,11 +43,11 @@ const pressEffect = { scale: 0.99 };
                         {{ reparation.voiture.marque }}
                     </div>
                     <div class="flex items-center gap-2 pt-2 relative">
-                        <div class="w-2/3 h-3 rounded-xs"
+                        <div class="w-full h-4 rounded-xs"
                             :style="{ backgroundColor: `#${reparation.voiture.couleurHex}` }"></div>
                     </div>
 
-                    <div class="flex h-8">
+                    <div class="flex h-7">
 
                     </div>
 
