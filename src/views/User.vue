@@ -6,18 +6,17 @@ import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import ProfileHeader from '@/components/profile/ProfileHeader.vue';
 import ProfileInfo from '@/components/profile/ProfileInfo.vue';
-import LogoutButton from '@/components/profile/LogoutButton.vue';
 import EditProfileModal from '@/components/profile/EditProfileModal.vue';
 import { logOutOutline } from 'ionicons/icons';
 import { User } from '@/types/types';
 
 const authStore = useAuthStore();
-const { user: userLazy, waitForUser } = authStore;
+const { waitForUser } = authStore;
 
 const user = ref<User | null>(null);
 
 onMounted(async () => {
-    user.value = await waitForUser();
+  user.value = await waitForUser();
 });
 
 const router = useRouter();

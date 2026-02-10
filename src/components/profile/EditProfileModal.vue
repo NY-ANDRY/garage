@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { IonModal, IonInput, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent } from '@ionic/vue';
+import { IonModal, IonInput, IonContent } from '@ionic/vue';
 import { ref, watch } from 'vue';
 import { User } from '@/types/types';
 import { useAuthStore } from '@/stores/auth';
-import Button from '@/components/buttons/Button.vue';
 
 const props = defineProps<{
     isOpen: boolean;
@@ -59,14 +58,15 @@ const updateDisplayName = async () => {
                 <div class="mb-6">
                     <label class="block text-sm font-medium text-gray-700 mb-3">Display Name</label>
                     <ion-input v-model="newDisplayName" placeholder="Enter your name"
-                        class="border-2 border-gray-100 rounded-2xl px-4 py-2 bg-gray-50 h-16 text-lg"></ion-input>
+                        class="border-2 border-gray-100 rounded-xl px-4 py-2 bg-gray-50 h-12 text-lg"></ion-input>
                 </div>
 
                 <!-- Footer Buttons -->
-                <div class="flex gap-4 pb-6">
-                    <Button @click="updateDisplayName" :disabled="isUpdating || !newDisplayName.trim()">
-                        {{ isUpdating ? 'Saving...' : 'Save' }}
-                    </Button>
+                <div class="flex gap-4 h-12 rounded-xl overflow-hidden">
+                    <UButton @click="updateDisplayName" :loading="isUpdating" loading-icon="i-lucide-loader" block 
+                    class="h-full">
+                        Save
+                    </UButton>
                 </div>
             </div>
         </ion-content>

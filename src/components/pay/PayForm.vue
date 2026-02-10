@@ -89,12 +89,15 @@ const handlePay2 = () => {
                 <ReparationBox :reparation="dataReparation" />
             </div>
 
-            <UButton :loading="loadingMutateReparations || loadingMutateRecuperation" loading-icon="i-lucide-loader"
-                block v-if="dataReparation && dataReparation.statut == 3" v-on:click="handleRecuperer"
-                class="flex justify-center h-12">Recuperer</UButton>
-            <UButton :loading="loadingMutateReparations || loadingMutateRecuperation" v-else v-on:click="handlePay"
-                loading-icon="i-lucide-loader" block class="flex justify-center h-12">Payer
-            </UButton>
+            <div v-if="dataReparation && dataReparation.statut == 3" class="flex rounded-xl overflow-hidden">
+                <UButton :loading="loadingMutateReparations || loadingMutateRecuperation" loading-icon="i-lucide-loader"
+                    block v-on:click="handleRecuperer" class="flex justify-center h-12">Recuperer</UButton>
+            </div>
+            <div v-else class="flex rounded-xl overflow-hidden">
+                <UButton :loading="loadingMutateReparations || loadingMutateRecuperation" v-on:click="handlePay"
+                    loading-icon="i-lucide-loader" block class="flex justify-center h-12">Payer
+                </UButton>
+            </div>
 
             <UModal v-model:open="openPay2" class="bg-white">
                 <template #content>
@@ -104,10 +107,10 @@ const handlePay2 = () => {
                             Ce n'est pas votre voiture!!!
                         </div>
                         <div class="flex justify-center mt-4">
-                            <div class="flex justify-center w-1/2 h-12">
+                            <div class="flex justify-center w-1/2 h-12 rounded-xl overflow-hidden">
                                 <UButton :loading="loadingMutateReparations || loadingMutateRecuperation"
                                     v-on:click="handlePay2" loading-icon="i-lucide-loader" block
-                                    class="flex justify-center h-10">Payer
+                                    class="flex justify-center h-full">Payer
                                 </UButton>
                             </div>
                         </div>
@@ -123,10 +126,10 @@ const handlePay2 = () => {
                             Ce n'est pas votre voiture!!!
                         </div>
                         <div class="flex justify-center mt-4">
-                            <div class="flex justify-center w-1/2 h-12">
+                            <div class="flex justify-center w-1/2 h-12 rounded-xl overflow-hidden">
                                 <UButton :loading="loadingMutateReparations || loadingMutateRecuperation"
                                     v-on:click="handleRecuperer2" loading-icon="i-lucide-loader" block
-                                    class="flex justify-center h-10">le Voler
+                                    class="flex justify-center h-full">le Voler
                                 </UButton>
                             </div>
                         </div>
