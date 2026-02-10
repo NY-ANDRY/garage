@@ -23,7 +23,7 @@ ion-content {
 }
 ion-header {
   background-color: var(--main-bg);
-  background-color: #ccc;
+  background-color: #999999;
 }
 ion-toolbar {
   --background: var(--main-bg);

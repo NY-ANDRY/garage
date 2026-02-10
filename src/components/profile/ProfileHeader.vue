@@ -24,11 +24,11 @@ const username = computed(() => {
     <div class="bg-white px-6 py-10 text-center mb-6">
         <!-- Avatar -->
         <div class="flex justify-center mb-4">
-            <div v-if="user?.photoURL" class="w-24 h-24 rounded-full overflow-hidden border-2 border-black">
+            <div v-if="user?.photoURL" class="w-24 h-24 rounded-full overflow-hidden border-0">
                 <img :src="user.photoURL" alt="Profile" class="w-full h-full object-cover" />
             </div>
             <div v-else
-                class="w-24 h-24 rounded-full bg-gray-100 border-2 border-black flex items-center justify-center">
+                class="w-24 h-24 rounded-full bg-gray-100 border-0 flex items-center justify-center">
                 <ion-icon :icon="personCircleOutline" class="text-6xl text-gray-400"></ion-icon>
             </div>
         </div>
